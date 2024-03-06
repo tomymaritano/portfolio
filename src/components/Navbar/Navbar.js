@@ -1,61 +1,57 @@
-import React from "react";
-
+import React from 'react';
 import {
   Flex,
   Box,
-  IconButton,
+  Text,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  Text,
-} from "@chakra-ui/react";
-
+  IconButton,
+  Button,
+} from '@chakra-ui/react';
 import {
   HamburgerIcon,
   AddIcon,
   ExternalLinkIcon,
   RepeatIcon,
   EditIcon,
-} from "@chakra-ui/icons";
+  SunIcon,
+} from '@chakra-ui/icons';
 
 const Navbar = () => {
   return (
     <Flex
-      alignItems={"center"}
-      justifyItems={"center"}
-      justifyContent={"space-between"}
+    top={0}
+    position={'sticky'}
+    w={'full'}
+      alignItems="center"
+      justifyContent="space-between"
       p={2}
-      bgColor={"#1A202C"}
+      bgColor="rgb(32, 37, 44, 0.8)" // Usar un color de fondo con transparencia
+      backdropFilter="blur(20px)" // Aplicar el efecto de desenfoque
+      zIndex="docked" // Asegurarse de que la barra de navegación se muestre sobre otros contenidos
     >
       <Box pl={4}>
-        <Text color={"white"} as={"b"}>
-          TomyDEV.
+        <Text color="white" as="b">
+          TDEV.
         </Text>
       </Box>
       <Box pr={4}>
         <Menu>
           <MenuButton
-            size={"sm"}
+          size={'sm'}
             as={IconButton}
             aria-label="Options"
-            color={"white"}
             icon={<HamburgerIcon />}
             variant="outline"
+            color="white"
           />
           <MenuList>
-            <MenuItem icon={<AddIcon />} command="⌘T">
-              New Tab
-            </MenuItem>
-            <MenuItem icon={<ExternalLinkIcon />} command="⌘N">
-              New Window
-            </MenuItem>
-            <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
-              Open Closed Tab
-            </MenuItem>
-            <MenuItem icon={<EditIcon />} command="⌘O">
-              Open File...
-            </MenuItem>
+            <MenuItem icon={<AddIcon />}>New Tab</MenuItem>
+            <MenuItem icon={<ExternalLinkIcon />}>New Window</MenuItem>
+            <MenuItem icon={<RepeatIcon />}>Open Closed Tab</MenuItem>
+            <MenuItem icon={<EditIcon />}>Open File...</MenuItem>
           </MenuList>
         </Menu>
       </Box>
