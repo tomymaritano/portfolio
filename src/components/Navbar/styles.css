@@ -1,0 +1,15 @@
+/* En tu archivo CSS */
+@keyframes tickerMove {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.crypto-ticker {
+  display: flex;
+  animation: tickerMove 20s linear infinite;
+}
+
