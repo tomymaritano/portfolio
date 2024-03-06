@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Flex,
   Box,
@@ -9,7 +9,7 @@ import {
   MenuItem,
   IconButton,
   Button,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 import {
   HamburgerIcon,
   AddIcon,
@@ -17,14 +17,17 @@ import {
   RepeatIcon,
   EditIcon,
   SunIcon,
-} from '@chakra-ui/icons';
+} from "@chakra-ui/icons";
+import ThemeToggleButton from "../../ThemeToggleButton";
+import { DiGithub } from "react-icons/di";
+import { FaGithub } from "react-icons/fa";
 
 const Navbar = () => {
   return (
     <Flex
-    top={0}
-    position={'sticky'}
-    w={'full'}
+      top={0}
+      position={"sticky"}
+      w={"full"}
       alignItems="center"
       justifyContent="space-between"
       p={2}
@@ -37,23 +40,31 @@ const Navbar = () => {
           TDEV.
         </Text>
       </Box>
-      <Box pr={4}>
-        <Menu>
-          <MenuButton
-          size={'sm'}
-            as={IconButton}
-            aria-label="Options"
-            icon={<HamburgerIcon />}
-            variant="outline"
-            color="white"
-          />
-          <MenuList>
-            <MenuItem icon={<AddIcon />}>New Tab</MenuItem>
-            <MenuItem icon={<ExternalLinkIcon />}>New Window</MenuItem>
-            <MenuItem icon={<RepeatIcon />}>Open Closed Tab</MenuItem>
-            <MenuItem icon={<EditIcon />}>Open File...</MenuItem>
-          </MenuList>
-        </Menu>
+      <Box display={"flex"} gap={1} pr={4}>
+        <Box>
+          <Button size={'sm'} bgColor="none"><FaGithub /></Button>
+        </Box>
+        <Box>
+          <ThemeToggleButton />
+        </Box>
+        <Box>
+          <Menu>
+            <MenuButton
+              size={"sm"}
+              as={IconButton}
+              aria-label="Options"
+              icon={<HamburgerIcon />}
+              variant="outline"
+              color="white"
+            />
+            <MenuList>
+              <MenuItem icon={<AddIcon />}>New Tab</MenuItem>
+              <MenuItem icon={<ExternalLinkIcon />}>New Window</MenuItem>
+              <MenuItem icon={<RepeatIcon />}>Open Closed Tab</MenuItem>
+              <MenuItem icon={<EditIcon />}>Open File...</MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
       </Box>
     </Flex>
   );

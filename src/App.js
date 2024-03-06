@@ -13,7 +13,7 @@ function App() {
     <CryptoNav />
     <Navbar />
     <Main />
-
+    <Projects />
     </>
   );
 }
