@@ -3,7 +3,10 @@ import { site } from "@/lib/site";
 
 export function SiteNav() {
   return (
-    <header className="sticky top-0 z-20 border-b border-line bg-background/90 backdrop-blur-md">
+    <header
+      className="sticky top-0 z-20 border-b border-line bg-background/90 backdrop-blur-md"
+      style={{ viewTransitionName: "site-header" }}
+    >
       <div className="mx-auto flex h-12 max-w-5xl items-center justify-between px-5">
         <Link href="/" className="text-[13px] tracking-tight">
           {site.handle}

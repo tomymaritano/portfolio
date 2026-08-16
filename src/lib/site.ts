@@ -16,6 +16,12 @@ export const work = [
     year: "2024—",
     href: "https://psynth.ai",
     cover: "/work/psynth/cover.svg",
+    loop: undefined as string | undefined,
+    stills: [
+      "/work/psynth/01.svg",
+      "/work/psynth/02.svg",
+      "/work/psynth/03.svg",
+    ],
   },
   {
     slug: "dolargaucho",
@@ -24,6 +30,12 @@ export const work = [
     year: "2025—",
     href: null as string | null,
     cover: "/work/dolargaucho/cover.svg",
+    loop: undefined as string | undefined,
+    stills: [
+      "/work/dolargaucho/01.svg",
+      "/work/dolargaucho/02.svg",
+      "/work/dolargaucho/03.svg",
+    ],
   },
 ] as const;
 

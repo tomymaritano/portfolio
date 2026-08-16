@@ -10,6 +10,7 @@ describe("site", () => {
   it("indexes the two spine cases", () => {
     expect(work.map((item) => item.slug)).toEqual(["psynth", "dolargaucho"]);
     expect(workBySlug("psynth")?.title).toBe("Psynth");
+    expect(workBySlug("psynth")?.stills.length).toBeGreaterThanOrEqual(3);
     expect(workBySlug("missing")).toBeNull();
   });
 });
