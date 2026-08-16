@@ -5,6 +5,7 @@ describe("site", () => {
   it("has a public X URL and email", () => {
     expect(site.x.startsWith("https://x.com/")).toBe(true);
     expect(site.email.includes("@")).toBe(true);
+    expect(site.about.length).toBeGreaterThanOrEqual(2);
   });
 
   it("indexes the two spine cases", () => {

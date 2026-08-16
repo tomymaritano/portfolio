@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DolarGauchoLoop } from "@/components/loops/dolargaucho-loop";
 import { PsynthLoop } from "@/components/loops/psynth-loop";
 import { PageTransition } from "@/components/page-transition";
@@ -21,14 +22,23 @@ export default function HomePage() {
             {site.headline}
           </h1>
           <p className="reveal reveal-delay-2 mt-4 max-w-lg text-[15px] text-muted">{site.line}</p>
-          <a
-            href={site.x}
-            target="_blank"
-            rel="noreferrer"
-            className="reveal reveal-delay-3 mt-8 inline-flex h-10 items-center rounded-full border border-line px-5 text-[13px] transition hover:bg-white/5"
-          >
-            Follow on X →
-          </a>
+          <div className="reveal reveal-delay-3 mt-8 flex items-center gap-4">
+            <a
+              href={site.x}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-10 items-center rounded-full border border-line px-5 text-[13px] transition hover:bg-white/5"
+            >
+              Follow on X →
+            </a>
+            <Link
+              href="/about"
+              transitionTypes={["nav-forward"]}
+              className="text-[13px] text-muted hover:text-foreground"
+            >
+              About
+            </Link>
+          </div>
         </section>
 
         <section id="work" className="mx-auto grid max-w-5xl gap-3 px-5 pb-20 md:grid-cols-2">

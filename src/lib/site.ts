@@ -6,6 +6,12 @@ export const site = {
   city: "Buenos Aires",
   x: "https://x.com/tomymaritano",
   email: "tomymaritano@gmail.com",
+  now: "Building Psynth.",
+  about: [
+    "I’m a product engineer in Buenos Aires. I design and ship software — Psynth, and products like DolarGaucho.",
+    "I care about the last mile: the thing someone actually sends, reads, or trusts on Monday. Not the demo.",
+    "I write when the decision is interesting. Most of that lives on X.",
+  ],
 } as const;
 
 export const work = [

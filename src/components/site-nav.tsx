@@ -12,6 +12,9 @@ export function SiteNav() {
           {site.handle}
         </Link>
         <nav aria-label="Site" className="flex items-center gap-5 text-[13px] text-muted">
+          <Link href="/about" transitionTypes={["nav-forward"]} className="hover:text-foreground">
+            about
+          </Link>
           <a href="/#work" className="hover:text-foreground">
             work
           </a>
