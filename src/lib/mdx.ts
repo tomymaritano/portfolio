@@ -1,13 +1,24 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { compileMDX } from "next-mdx-remote/rsc";
-import type { WorkSlug } from "@/lib/site";
+import { mdxComponents } from "@/components/mdx-components";
 
-export async function loadWork(slug: WorkSlug) {
-  const file = path.join(process.cwd(), "content/work", `${slug}.mdx`);
+type Frontmatter = { title: string; line: string };
+
+async function loadMdx(dir: "work" | "writing", slug: string) {
+  const file = path.join(process.cwd(), "content", dir, `${slug}.mdx`);
   const source = await readFile(file, "utf8");
-  return compileMDX<{ title: string; line: string }>({
+  return compileMDX<Frontmatter>({
     source,
+    components: mdxComponents,
     options: { parseFrontmatter: true },
   });
+}
+
+export function loadWork(slug: string) {
+  return loadMdx("work", slug);
+}
+
+export function loadWriting(slug: string) {
+  return loadMdx("writing", slug);
 }

@@ -1,0 +1,22 @@
+---
+title: "Migrating Images to Cloudinary"
+line: Repo size down 99.7%.
+---
+
+The git repo was 450MB. After moving images to Cloudinary it dropped to 1.2MB.
+
+## The problem
+
+Images in the repo look convenient until clone is slow, CI is slow, nothing is optimized, and binary diffs are noise.
+
+## Why Cloudinary
+
+Automatic format conversion (WebP, AVIF), on-the-fly resize, a CDN, a usable free tier, and a clean Next.js path.
+
+## The move
+
+Bulk upload, point `images.remotePatterns` at `res.cloudinary.com`, wrap URLs in a helper, then search-and-replace. About an hour.
+
+## Results
+
+Repo 450MB → 1.2MB. Build 3min → 45sec. Page load 2.4s → 0.8s with automatic WebP. Worth the hour.

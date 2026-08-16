@@ -8,7 +8,7 @@ export function MuteMedia({
   label,
 }: {
   src?: string;
-  cover: string;
+  cover?: string;
   label: string;
 }) {
   const [reduce, setReduce] = useState(false);
@@ -20,7 +20,7 @@ export function MuteMedia({
   if (!src || reduce) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={cover} alt="" className="h-full w-full object-cover" />
+      cover ? <img src={cover} alt="" className="h-full w-full object-cover" /> : null
     );
   }
 
