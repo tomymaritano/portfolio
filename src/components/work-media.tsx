@@ -3,7 +3,7 @@ import { MuteMedia } from "@/components/mute-media";
 import { ScreenReel } from "@/components/screen-reel";
 
 export function WorkMedia({ item }: { item: WorkItem }) {
-  const frames = [item.cover, ...(item.stills ?? [])].filter((src): src is string => Boolean(src));
+  const frames = [...new Set([item.cover, ...(item.stills ?? [])].filter((src): src is string => Boolean(src)))];
 
   return (
     <section className="mt-14" aria-label={`${item.title} product`}>

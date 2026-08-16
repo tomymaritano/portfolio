@@ -39,7 +39,7 @@ export function ScreenReel({
         {frames.map((src, i) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            key={src}
+            key={`${i}-${src}`}
             src={src}
             alt=""
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
@@ -52,7 +52,7 @@ export function ScreenReel({
         <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5" role="tablist" aria-label={label}>
           {frames.map((src, i) => (
             <button
-              key={src}
+              key={`${i}-${src}`}
               type="button"
               role="tab"
               aria-selected={i === index}

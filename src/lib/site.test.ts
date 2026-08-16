@@ -25,6 +25,9 @@ describe("site", () => {
     expect(workBySlug("missing")).toBeNull();
     expect(writingBySlug("claude-code-pm")?.date).toBe("2025-10-03");
     expect(work.some((item) => item.slug === "dolargaucho")).toBe(true);
+    expect(work.map((item) => item.slug)).toEqual(
+      expect.arrayContaining(["unicoin", "billspace", "grandvalira-sede", "freedom-people", "jetsetz"]),
+    );
   });
 
   it("keeps work and writing on separate indexes", () => {
