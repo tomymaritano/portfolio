@@ -1,18 +1,18 @@
 ---
 title: Cairn
-line: Workflow engine for onboarding and guidance.
+line: Onboarding as a state machine, not a tooltip list.
 ---
 
 ## Problem
 
-Most product tours are a linear list of tooltips. Real onboarding branches, spans pages, and needs an event stream you can send to analytics. Tour libraries bolt that on.
+Tours are a linear list of tooltips. Real onboarding branches, spans pages, and needs an event stream you can send. Libraries bolt that on after the fact.
 
 ## What I built
 
-Cairn is a state-machine workflow engine for onboarding and user guidance. The core is framework-agnostic. React is the first binding. You own the UI; Cairn owns the path, persistence, and events.
+A state-machine workflow engine. Framework-agnostic core; React is the first binding. You own the UI. Cairn owns the path, persistence, and events.
 
 ## One hard decision
 
-Decouple the engine from the renderer. A tooltip library dies when the DOM changes. A state machine survives navigation.
+The engine is not the renderer. A tooltip library dies when the DOM changes. A state machine survives navigation.
 
 Docs and demo live at [react-cairn.vercel.app](https://react-cairn.vercel.app).

@@ -1,4 +1,5 @@
 export const shell = "mx-auto w-full max-w-[680px] px-5";
+export const shellWide = "mx-auto w-full max-w-[880px] px-5";
 
 export function PageFrame({
   children,

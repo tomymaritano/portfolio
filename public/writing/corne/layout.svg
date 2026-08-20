@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" fill="none">
+  <rect width="720" height="280" fill="#0c0c0c"/>
+  <g stroke="#3a3a3a" stroke-width="1">
+    <g transform="translate(48,48)">
+      <rect x="0" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="44" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="88" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="132" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="176" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="220" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="0" y="44" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="44" y="44" width="36" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.45"/>
+      <rect x="88" y="44" width="36" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.45"/>
+      <rect x="132" y="44" width="36" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.45"/>
+      <rect x="176" y="44" width="36" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.45"/>
+      <rect x="220" y="44" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="0" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="44" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="88" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="132" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="176" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="220" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="132" y="148" width="36" height="36" rx="4" fill="#161616"/>
+      <rect x="176" y="156" width="36" height="36" rx="4" fill="#161616"/>
+      <rect x="220" y="164" width="40" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.7"/>
+    </g>
+    <g transform="translate(416,48)">
+      <rect x="0" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="44" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="88" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="132" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="176" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="220" y="0" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="0" y="44" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="44" y="44" width="36" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.45"/>
+      <rect x="88" y="44" width="36" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.45"/>
+      <rect x="132" y="44" width="36" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.45"/>
+      <rect x="176" y="44" width="36" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.45"/>
+      <rect x="220" y="44" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="0" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="44" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="88" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="132" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="176" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="220" y="88" width="36" height="36" rx="4" fill="#141414"/>
+      <rect x="0" y="164" width="40" height="36" rx="4" fill="#1a1a1a" stroke="#6eedc6" stroke-opacity="0.7"/>
+      <rect x="48" y="156" width="36" height="36" rx="4" fill="#161616"/>
+      <rect x="92" y="148" width="36" height="36" rx="4" fill="#161616"/>
+    </g>
+  </g>
+  <text x="176" y="36" fill="#8d8d8d" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">left 3x6 + 3</text>
+  <text x="520" y="36" fill="#8d8d8d" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">right 3x6 + 3</text>
+  <text x="360" y="268" text-anchor="middle" fill="#8d8d8d" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">home row and inner thumbs carry the layers</text>
+</svg>

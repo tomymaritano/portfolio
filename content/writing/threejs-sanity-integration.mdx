@@ -3,14 +3,14 @@ title: "Three.js + Sanity CMS"
 line: 3D scenes that stay editable.
 ---
 
-Three.js is powerful. Sanity is flexible. Getting them to play together took some figuring out.
+Three.js is imperative. Sanity is async. A React re-render will kill a WebGL context if you let it.
 
 ## The challenge
 
-I wanted a 3D surface whose content was editable in a CMS. Three.js scenes are imperative. Sanity data is async. React re-renders break 3D contexts. Performance was the first thing to die.
+I wanted a 3D surface whose content was editable in a CMS. Fetching inside the scene, or letting CMS updates remount the canvas, is how performance dies first.
 
 ## What worked
 
 Keep Three.js in its own component, isolated from CMS updates. Fetch all Sanity data before mounting the canvas — no async inside the scene. Use `@react-three/fiber` carefully (`useFrame` plus stale closures will haunt you). Memoize anything that touches the renderer.
 
-3D and a CMS can coexist. The elegant architecture is often more complex than the one that stays smooth.
+The architecture that stays smooth is usually the less elegant one. 3D and a CMS can coexist if the canvas does not wait on the CMS.

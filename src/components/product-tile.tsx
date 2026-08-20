@@ -1,29 +1,42 @@
-import Link from "next/link";
-import { ViewTransition } from "react";
-import type { WorkItem } from "@/lib/site";
+"use client";
 
-export function ProductTile({
-  item,
-  children,
-}: {
-  item: WorkItem;
-  children: React.ReactNode;
-}) {
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide";
+import { ViewTransition } from "react";
+import { ToggleMorphIcon } from "@/components/hover-morph-icon";
+import { TilePlaceholder } from "@/components/tile-placeholder";
+import { homeMeta, type WorkItem } from "@/lib/site";
+
+export function ProductTile({ item }: { item: WorkItem }) {
+  const meta = homeMeta[item.slug as keyof typeof homeMeta];
+  const [over, setOver] = useState(false);
+
   return (
     <Link
       href={`/work/${item.slug}`}
       transitionTypes={["nav-forward"]}
-      className="group flex min-h-[280px] flex-col overflow-hidden rounded-2xl border border-line bg-card transition duration-300 hover:border-foreground/20 sm:min-h-[320px]"
+      onPointerEnter={() => setOver(true)}
+      onPointerLeave={() => setOver(false)}
+      className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-line bg-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-[0_16px_40px_rgba(0,0,0,0.35)]"
     >
       <ViewTransition name={`work-${item.slug}`} share="morph" default="none">
-        <div className="relative min-h-0 flex-1 overflow-hidden transition duration-500 group-hover:scale-[1.02]">
-          {children}
+        <div className="relative aspect-16/10 overflow-hidden bg-[#111]">
+          <div className="h-full transition-transform duration-500 ease-out group-hover:scale-[1.04]">
+            <TilePlaceholder item={item} />
+          </div>
         </div>
       </ViewTransition>
-      <div className="flex items-center justify-between px-4 py-3 text-[13px]">
-        <span>{item.title}</span>
-        <span className="text-muted transition duration-300 group-hover:translate-x-0.5 group-hover:text-foreground">
-          Explore →
+      <div className="flex flex-1 flex-col px-5 py-4">
+        <p className="font-mono text-[10px] tracking-[0.16em] text-muted uppercase">
+          {meta?.tag}
+          {meta && "role" in meta && meta.role ? ` · ${meta.role}` : ""}
+        </p>
+        <h2 className="mt-2 text-[1.15rem] leading-tight font-semibold tracking-tight">{item.title}</h2>
+        <p className="mt-1.5 text-[14px] leading-6 text-foreground/70">{item.line}</p>
+        <span className="mt-4 inline-flex items-center gap-1 text-[13px] text-muted transition-colors duration-200 group-hover:text-accent">
+          Explore
+          <ToggleMorphIcon rest={ArrowRight} hover={ArrowUpRight} on={over} />
         </span>
       </div>
     </Link>

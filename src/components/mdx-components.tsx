@@ -11,6 +11,12 @@ function mermaidSource(node: ReactNode): string | null {
 
 export const mdxComponents = {
   Mermaid,
+  img: (props: ComponentProps<"img">) => (
+    <img
+      {...props}
+      className="my-8 w-full rounded-xl border border-line bg-card"
+    />
+  ),
   pre: ({ children, ...props }: ComponentProps<"pre">) => {
     const chart = mermaidSource(children);
     if (chart) return <Mermaid chart={chart} />;

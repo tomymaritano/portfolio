@@ -1,0 +1,18 @@
+---
+title: Dripnex
+line: AI note taker. SQLite now, sync next.
+---
+
+## Problem
+
+Notes either sit in a vendor cloud or in a folder with no path to other surfaces. I wanted one store on the machine today that can sync later — without rewriting the product.
+
+## What I built
+
+An AI note taker. Split source and preview, notebooks, tags, tasks, an outline, a command palette. Storage is SQLite — local today, so the same notes can sync to other platforms when those surfaces ship. The open-source core lives in [readide](https://github.com/dripnex/readide): parsing, storage, wikilinks, plugins.
+
+## One hard decision
+
+SQLite is the source of truth. Plain files are easy to romanticize. A local database is what you can sync later without a migration story. The other surfaces are not shipping yet. The store should not wait on them.
+
+Live at [dripnex.app](https://dripnex.app). Core: [github.com/dripnex/readide](https://github.com/dripnex/readide).

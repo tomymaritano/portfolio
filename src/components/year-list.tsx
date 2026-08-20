@@ -19,13 +19,17 @@ export function YearList({ items }: { items: readonly Row[] }) {
           <Link
             href={item.path}
             transitionTypes={["nav-forward"]}
-            className="grid grid-cols-[3.5rem_minmax(0,1fr)] items-baseline gap-x-4 py-[0.85rem] text-[15px] sm:grid-cols-[3.5rem_minmax(0,1fr)_auto]"
+            className="group grid cursor-pointer grid-cols-[3.5rem_minmax(0,1fr)] items-baseline gap-x-4 py-[0.85rem] text-[15px] sm:grid-cols-[3.5rem_minmax(0,1fr)_auto]"
           >
             <span className="text-muted tabular-nums">{item.showYear ? item.started : ""}</span>
             <ViewTransition name={`${item.kind}-${item.slug}`} share="morph" default="none">
-              <span className="text-foreground">{item.title}</span>
+              <span className="text-foreground transition-colors duration-200 group-hover:text-accent">
+                {item.title}
+              </span>
             </ViewTransition>
-            <span className="hidden text-right text-muted sm:block">{item.line}</span>
+            <span className="hidden text-right text-muted transition-colors duration-200 group-hover:text-foreground/65 sm:block">
+              {item.line}
+            </span>
           </Link>
         </li>
       ))}

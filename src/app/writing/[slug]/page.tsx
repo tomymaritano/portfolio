@@ -32,7 +32,7 @@ export default async function WritingPage({ params }: { params: Promise<{ slug: 
           </ViewTransition>
           <p className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-[13px] text-muted">
             <span>
-              <a href={site.x} target="_blank" rel="noreferrer" className="hover:text-foreground">
+              <a href={site.x} target="_blank" rel="noreferrer" className="transition-colors duration-200 hover:text-foreground">
                 @{site.xHandle}
               </a>
               <span>
@@ -47,7 +47,7 @@ export default async function WritingPage({ params }: { params: Promise<{ slug: 
           {content}
         </article>
         <div className="mt-16 text-[13px] text-muted">
-          <Link href="/writing" transitionTypes={["nav-back"]} className="hover:text-foreground">
+          <Link href="/writing" transitionTypes={["nav-back"]} className="transition-colors duration-200 hover:text-foreground">
             ← Writing
           </Link>
         </div>

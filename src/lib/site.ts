@@ -2,7 +2,7 @@ export const site = {
   name: "Tomás Maritano",
   handle: "tomás",
   headline: "I ship products.",
-  line: "Software engineer and writer. I build software and write about the decisions behind it.",
+  line: "I extract messy inputs into structured data, then generate the document someone will send.",
   city: "Buenos Aires",
   x: "https://x.com/tomymaritano",
   xHandle: "tomymaritano",
@@ -11,59 +11,80 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/tomymaritano",
   photo: "/perfil.png",
   about: [
-    "I’m a software engineer in Buenos Aires. I design and ship software — HIPAA-compliant healthcare platforms, AI-powered systems, and multi-tenant SaaS. I studied at Universidad Tecnológica Nacional.",
-    "I started building client sites at Su Web Express in 2017. In 2020 I moved to Copenhagen and did frontend at Wolt. I later worked full-stack at Grandvalira in Andorra — tourism tech — and as a senior frontend at Valere Realms, on Web3.",
-    "In 2024 I joined Unicoin, crypto and fintech. The throughline of the last decade has been the same problem from different angles: make complex systems feel obvious.",
-    "I’m now at Psynth. I joined as a design engineer and I lead the development team, building AI-powered psychological assessment tools — the frontend, the design system, and the clinical surface. I also ship my own products. I write when the decision is interesting.",
+    "I take a messy input and produce a document a person will send — not a dump of the model. I lead engineering at Psynth. I joined as a design engineer.",
+    "I was twelve, making brochure sites on a CMS. Client pages, not products. Buenos Aires. I studied at Universidad Tecnológica Nacional.",
+    "Su Web Express hired me in 2017. Then Wolt in Copenhagen, Grandvalira in Andorra, Valere Realms, Unicoin in 2024. Frontend first, then the stack under it. I did not abandon the surface. I started owning what it sits on. I write when the decision is interesting.",
   ],
   contributions: [
     {
+      href: "https://dripnex.app",
+      title: "Dripnex",
+      lead: "Built ",
+      tail: ", an AI note taker. SQLite now — local today so the same notes can sync when other surfaces ship.",
+    },
+    {
       href: "https://psynth.ai",
       title: "Psynth",
-      lead: "I lead the development team at ",
-      tail: ", a clinical assessment platform. I joined as a design engineer and now own the path from the surface a clinician uses to the document they actually send — identity, reports, generation, export — as one product system, not a pile of tools.",
+      lead: "I lead engineering at ",
+      tail: ". Test results and intake become a draft the psychologist reviews and signs. I joined as a design engineer.",
     },
     {
       href: "https://dolargaucho.com",
       title: "DolarGaucho",
       lead: "Built ",
-      tail: ", Argentine macro as a product. The quote is not the product — the product is how fast someone can trust the strip and move on, instead of assembling the week from screenshots and group chats.",
+      tail: ". Quotes and a model that reads the Argentine week, so someone can trust the strip and move on.",
     },
     {
       href: "https://readied.app",
       title: "Readied",
-      lead: "Authored ",
-      tail: ", an offline-first Markdown editor. Notes stay as plain files on your machine — no proprietary format, no internet required, no vendor holding the words hostage.",
+      lead: "Built ",
+      tail: ", an offline-first Markdown editor. Notes stay as plain files on your machine. No proprietary format. No vendor holding the words.",
     },
     {
       href: "https://tomymaritano.github.io/criterionx/",
       title: "Criterion",
-      lead: "Authored ",
-      tail: ", a deterministic and explainable decision engine. Business-critical rules become pure, testable functions with an audit trail — same input, same output, and a reason you can show when someone asks why.",
+      lead: "Built ",
+      tail: ", a deterministic decision engine. Same input, same output, and a reason you can show when someone asks why.",
     },
     {
       href: "https://react-cairn.vercel.app",
       title: "Cairn",
-      lead: "Designed ",
-      tail: ", a state-machine workflow engine for onboarding and user guidance. Tour libraries are a linear list of tooltips; Cairn owns the path, the branches, and the event stream, and you own the UI.",
+      lead: "Built ",
+      tail: ", a state-machine workflow engine. You own the UI. Cairn owns the path, the branches, and the event stream.",
     },
   ],
   stack: [
-    { label: "Cloud", items: ["AWS", "GCP", "Kubernetes", "Docker", "Terraform", "ArgoCD"] },
-    { label: "Frontend", items: ["TypeScript", "JavaScript", "React", "Next.js", "CSS", "Tailwind"] },
-    { label: "Backend", items: ["Python", "Node.js", "FastAPI", "Go", "Rust"] },
-    { label: "Keyboards", items: ["Lua", "C#"] },
-    { label: "Data", items: ["PostgreSQL", "MongoDB", "Redis", "Prisma"] },
-    { label: "AI", items: ["LLM orchestration", "Vertex AI", "Reinforcement learning"] },
+    { label: "Cloud", items: ["AWS", "GCP", "Vercel", "Kubernetes", "Docker", "Terraform", "ArgoCD", "CodeArtifact"] },
+    { label: "Frontend", items: ["TypeScript", "JavaScript", "React", "Next.js", "Svelte", "HTMX", "CSS", "Tailwind", "Three.js"] },
+    { label: "Native", items: ["Swift", "React Native", "Electron"] },
+    { label: "Backend", items: ["Python", "Node.js", "FastAPI", "Hono", "Express", "tRPC", "Go", "Rust"] },
+    { label: "Data", items: ["PostgreSQL", "SQLite", "MongoDB", "Redis", "Prisma"] },
+    { label: "Content", items: ["Sanity", "Cloudinary", "MDX"] },
+    { label: "AI", items: ["Vertex AI", "Bedrock", "Anthropic", "LLM orchestration", "PyTorch", "Reinforcement learning"] },
+    { label: "Keyboards", items: ["QMK", "ZMK", "Lua", "C#"] },
   ],
 } as const;
 
 export const work = [
   {
     kind: "work" as const,
+    slug: "dripnex",
+    title: "Dripnex",
+    line: "AI note taker. SQLite now, sync next.",
+    started: 2026,
+    date: "2026-08-18",
+    year: "2026—",
+    href: "https://dripnex.app",
+    repo: "https://github.com/dripnex/readide",
+    cover: "/work/dripnex/cover.svg",
+    loop: undefined as string | undefined,
+    stills: ["/work/dripnex/01.svg", "/work/dripnex/02.svg", "/work/dripnex/03.svg"],
+  },
+  {
+    kind: "work" as const,
     slug: "psynth",
     title: "Psynth",
-    line: "Clinical product. I lead engineering.",
+    line: "Clinical reporting. I lead engineering.",
     started: 2026,
     date: "2026-08-01",
     year: "2026—",
@@ -75,9 +96,23 @@ export const work = [
   },
   {
     kind: "work" as const,
+    slug: "quantis-intel",
+    title: "Quantis-intel",
+    line: "The financial report a desk will send.",
+    started: 2026,
+    date: "2026-07-15",
+    year: "2026",
+    href: null as string | null,
+    repo: null as string | null,
+    cover: "/work/quantis-intel/cover.svg",
+    loop: undefined as string | undefined,
+    stills: ["/work/quantis-intel/cover.svg"],
+  },
+  {
+    kind: "work" as const,
     slug: "cairn",
     title: "Cairn",
-    line: "Workflow engine for onboarding and guidance.",
+    line: "Onboarding as a state machine, not a tooltip list.",
     started: 2026,
     date: "2026-06-14",
     year: "2026",
@@ -91,7 +126,7 @@ export const work = [
     kind: "work" as const,
     slug: "readied",
     title: "Readied",
-    line: "Offline-first Markdown editor.",
+    line: "Notes as plain files on your machine.",
     started: 2026,
     date: "2026-03-01",
     year: "2026",
@@ -105,7 +140,7 @@ export const work = [
     kind: "work" as const,
     slug: "dolargaucho",
     title: "DolarGaucho",
-    line: "Argentine macro, as a product.",
+    line: "Quotes and a model that reads the Argentine week.",
     started: 2025,
     date: "2025-08-01",
     year: "2025—",
@@ -119,7 +154,7 @@ export const work = [
     kind: "work" as const,
     slug: "criterionx",
     title: "Criterion",
-    line: "Deterministic, explainable decision engine.",
+    line: "Same input, same output, and a reason.",
     started: 2025,
     date: "2025-12-29",
     year: "2025",
@@ -161,7 +196,7 @@ export const work = [
     kind: "work" as const,
     slug: "silvina-moschini",
     title: "Silvina Moschini",
-    line: "Personal site for a Latin American unicorn founder.",
+    line: "Lead with the talk, not the bio.",
     started: 2024,
     date: "2024-04-01",
     year: "2024",
@@ -175,7 +210,7 @@ export const work = [
     kind: "work" as const,
     slug: "billspace",
     title: "BillSpace",
-    line: "Subscriptions for expats in the Netherlands.",
+    line: "Cancel one Dutch bill without a local friend.",
     started: 2025,
     date: "2025-05-01",
     year: "2025",
@@ -203,7 +238,7 @@ export const work = [
     kind: "work" as const,
     slug: "jetsetz",
     title: "Jetsetz",
-    line: "Wholesale business class, as a consumer site.",
+    line: "Show the deal, not fifteen filters.",
     started: 2025,
     date: "2025-03-01",
     year: "2025",
@@ -231,7 +266,7 @@ export const work = [
     kind: "work" as const,
     slug: "turbotime",
     title: "TurboTime",
-    line: "Turn a fuzzy ops vision into a scoped tool.",
+    line: "Name the jobs Excel was actually doing.",
     started: 2025,
     date: "2025-02-01",
     year: "2025",
@@ -245,7 +280,7 @@ export const work = [
     kind: "work" as const,
     slug: "viny",
     title: "Viny",
-    line: "Local Markdown with search and plugins.",
+    line: "The file is the source of truth.",
     started: 2025,
     date: "2025-01-15",
     year: "2025",
@@ -273,7 +308,7 @@ export const work = [
     kind: "work" as const,
     slug: "freedom-people",
     title: "The Freedom People",
-    line: "Learning platform with Lightning payments.",
+    line: "Checkout that feels like Lightning, not a bank.",
     started: 2023,
     date: "2023-08-01",
     year: "2023",
@@ -315,7 +350,7 @@ export const work = [
     kind: "work" as const,
     slug: "g1m",
     title: "G1M",
-    line: "Fitness e-commerce for Argentina.",
+    line: "Local checkout, not a US template.",
     started: 2023,
     date: "2023-03-01",
     year: "2023",
@@ -329,7 +364,7 @@ export const work = [
     kind: "work" as const,
     slug: "privatelimo",
     title: "Private Limo",
-    line: "Executive cars in Buenos Aires.",
+    line: "WhatsApp is the checkout.",
     started: 2023,
     date: "2023-02-01",
     year: "2023",
@@ -343,7 +378,7 @@ export const work = [
     kind: "work" as const,
     slug: "grandvalira-sede",
     title: "Grandvalira Sede",
-    line: "Employee directory with real roles.",
+    line: "Roles in the token, checked on every write.",
     started: 2022,
     date: "2022-06-01",
     year: "2022",
@@ -358,6 +393,24 @@ export const work = [
 export const writing = [
   {
     kind: "writing" as const,
+    slug: "grok-bot-and-cursor",
+    title: "Grok 4.6 in Cursor is not Grok Bot",
+    line: "One loop lives in the repo. The other has a computer.",
+    started: 2026,
+    date: "2026-08-20",
+    year: "2026",
+  },
+  {
+    kind: "writing" as const,
+    slug: "corne-keyboard",
+    title: "A Corne is a 42-key contract",
+    line: "Layers are the product. The PCB is just the case.",
+    started: 2026,
+    date: "2026-08-20",
+    year: "2026",
+  },
+  {
+    kind: "writing" as const,
     slug: "section-generation-pipeline",
     title: "How a report section is generated",
     line: "If gen and regen are two products, they drift.",
@@ -369,7 +422,7 @@ export const writing = [
     kind: "writing" as const,
     slug: "claude-code-pm",
     title: "Claude Code: Why Even Bother as a PM?",
-    line: "Shipping faster without waiting on a ticket.",
+    line: "Prototype the spec before you file the ticket.",
     started: 2025,
     date: "2025-10-03",
     year: "2025",
@@ -396,7 +449,7 @@ export const writing = [
     kind: "writing" as const,
     slug: "ai-business-validation",
     title: "How AI Helped Me Validate a Business Idea in One Week",
-    line: "From vague idea to a plan you can test.",
+    line: "A week of calls, not a month of nights.",
     started: 2025,
     date: "2025-06-15",
     year: "2025",
@@ -408,6 +461,47 @@ export type WorkSlug = WorkItem["slug"];
 export type WritingItem = (typeof writing)[number];
 export type WritingSlug = WritingItem["slug"];
 export type IndexItem = WorkItem | WritingItem;
+export type WorkLane = "product" | "role" | "client";
+
+export const workLanes = {
+  dripnex: "product",
+  psynth: "product",
+  "quantis-intel": "product",
+  cairn: "product",
+  readied: "product",
+  dolargaucho: "product",
+  criterionx: "product",
+  unicoin: "role",
+  "unicorn-hunters": "client",
+  "silvina-moschini": "client",
+  billspace: "client",
+  heirloom: "product",
+  jetsetz: "client",
+  "lego-store": "product",
+  turbotime: "product",
+  viny: "product",
+  menkiki: "product",
+  "freedom-people": "client",
+  blacro: "product",
+  isolla: "client",
+  g1m: "client",
+  privatelimo: "client",
+  "grandvalira-sede": "role",
+} as const satisfies Record<WorkSlug, WorkLane>;
+
+export const workLaneLabel: Record<WorkLane, string> = {
+  product: "Product",
+  role: "Role",
+  client: "Client",
+};
+
+export const workNotes = {
+  psynth: "section-generation-pipeline",
+} as const satisfies Partial<Record<WorkSlug, WritingSlug>>;
+
+export function workLane(slug: WorkSlug): WorkLane {
+  return workLanes[slug];
+}
 
 export function workBySlug(slug: string): WorkItem | null {
   return work.find((item) => item.slug === slug) ?? null;
@@ -431,8 +525,37 @@ function datedIndex<T extends IndexItem>(items: readonly T[]) {
   });
 }
 
+export const homeSlugs = ["psynth", "dripnex", "dolargaucho", "quantis-intel"] as const;
+
+export const homeMeta = {
+  psynth: { tag: "Clinical reporting", role: "Head of Engineering" },
+  dripnex: { tag: "AI notes" },
+  dolargaucho: { tag: "AI finance" },
+  "quantis-intel": { tag: "Financial reporting" },
+} as const;
+
+export function homeWork() {
+  return homeSlugs.map((slug) => workBySlug(slug)).filter((item): item is WorkItem => item !== null);
+}
+
 export function workIndex() {
   return datedIndex(work);
+}
+
+export function workSections() {
+  const lanes: WorkLane[] = ["product", "role", "client"];
+  const titles: Record<WorkLane, string> = {
+    product: "Products",
+    role: "Roles",
+    client: "Clients",
+  };
+  return lanes
+    .map((lane) => ({
+      lane,
+      title: titles[lane],
+      items: datedIndex(work.filter((item) => workLanes[item.slug] === lane)),
+    }))
+    .filter((section) => section.items.length > 0);
 }
 
 export function writingIndex() {
