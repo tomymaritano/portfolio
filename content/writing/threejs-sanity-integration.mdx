@@ -1,16 +1,36 @@
 ---
-title: "Three.js + Sanity CMS"
-line: 3D scenes that stay editable.
+title: "The canvas does not wait on Sanity"
+line: "Fetch first. Then mount WebGL."
 ---
 
-Three.js is imperative. Sanity is async. A React re-render will kill a WebGL context if you let it.
+Three.js is imperative. [Sanity](https://www.sanity.io/) is async. A React re-render will kill a WebGL context if you let it. I wanted a 3D surface whose content stayed editable in a CMS. The canvas and the CMS can coexist. They cannot share a render cycle.
 
-## The challenge
+## The problem
 
-I wanted a 3D surface whose content was editable in a CMS. Fetching inside the scene, or letting CMS updates remount the canvas, is how performance dies first.
+Fetching inside the scene looks convenient. So does remounting the canvas when a field changes. Both die the same way: the context is gone, the first frame is expensive, and you start inventing loading states that are really remounts.
 
-## What worked
+`@react-three/fiber` does not save you. `useFrame` plus a stale closure will haunt you. Memoize anything that touches the renderer, or do not touch it.
 
-Keep Three.js in its own component, isolated from CMS updates. Fetch all Sanity data before mounting the canvas — no async inside the scene. Use `@react-three/fiber` carefully (`useFrame` plus stale closures will haunt you). Memoize anything that touches the renderer.
+## One hard decision
 
-The architecture that stays smooth is usually the less elegant one. 3D and a CMS can coexist if the canvas does not wait on the CMS.
+Keep Three.js in its own component. Isolate it from CMS updates. Fetch all Sanity data **before** the canvas mounts. No async inside the scene. The architecture that stays smooth is usually the less elegant one.
+
+```mermaid
+flowchart LR
+  sanity[Sanity fetch] --> data[Ready payload]
+  data --> canvas[Mount WebGL]
+  canvas --> frame[useFrame]
+  sanity -.->|do not| frame
+```
+
+A field change updates the data. It does not remount the canvas. If two trees own the renderer, they will disagree.
+
+## What I would not do again
+
+Put a GROQ query in a `useFrame`. The first time it looks live. The third time you have two clocks.
+
+Let the CMS remount the canvas “to be safe.” Safe is the previous context, still alive.
+
+## The bar
+
+An editable scene that does not die when a title changes. The last mile is still the same: a frame someone can look at — not a dump of the model I call a CMS.
