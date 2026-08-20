@@ -393,6 +393,15 @@ export const work = [
 export const writing = [
   {
     kind: "writing" as const,
+    slug: "devwibar-tls",
+    title: "DevWifiBar does not open TLS",
+    line: "If signal is Excellent and ping is 120, the model filled the pipe.",
+    started: 2026,
+    date: "2026-08-20",
+    year: "2026",
+  },
+  {
+    kind: "writing" as const,
     slug: "grok-bot-and-cursor",
     title: "Grok 4.6 in Cursor is not Grok Bot",
     line: "One loop lives in the repo. The other has a computer.",

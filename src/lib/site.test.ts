@@ -49,8 +49,10 @@ describe("site", () => {
     expect(workBySlug("readied")?.repo?.includes("github.com")).toBe(true);
     expect(workBySlug("missing")).toBeNull();
     expect(writingBySlug("claude-code-pm")?.date).toBe("2025-10-03");
+    expect(writingBySlug("devwibar-tls")?.title).toBe("DevWifiBar does not open TLS");
     expect(writingBySlug("grok-bot-and-cursor")?.title).toBe("Grok 4.6 in Cursor is not Grok Bot");
     expect(writingBySlug("corne-keyboard")?.title).toBe("A Corne is a 42-key contract");
+    expect(writingBySlug("devwibar-tls")?.date).toBe("2026-08-20");
     expect(writingBySlug("grok-bot-and-cursor")?.date).toBe("2026-08-20");
     expect(writingBySlug("corne-keyboard")?.date).toBe("2026-08-20");
     expect(work.some((item) => item.slug === "dolargaucho")).toBe(true);
@@ -69,8 +71,8 @@ describe("site", () => {
     expect(projects.map((item) => item.slug)).not.toContain("claude-code-pm");
     expect(homeWork().map((item) => item.slug)).toEqual(["psynth", "dripnex", "dolargaucho", "quantis-intel"]);
     expect(workBySlug("quantis-intel")?.line).toBe("The financial report a desk will send.");
-    expect(notes[0]?.slug).toBe("grok-bot-and-cursor");
-    expect(notes[1]?.slug).toBe("corne-keyboard");
+    expect(notes[0]?.slug).toBe("devwibar-tls");
+    expect(notes[1]?.slug).toBe("grok-bot-and-cursor");
     expect(notes.map((item) => item.slug)).toContain("section-generation-pipeline");
     expect(workLanes.dripnex).toBe("product");
     expect(workLanes.unicoin).toBe("role");

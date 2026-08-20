@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 240" fill="none">
+  <rect width="720" height="240" fill="#0c0c0c"/>
+  <rect x="24" y="24" width="672" height="44" rx="10" fill="#111" stroke="#1d1d1d"/>
+  <circle cx="48" cy="46" r="5" fill="#3a3a3a"/>
+  <circle cx="64" cy="46" r="5" fill="#3a3a3a"/>
+  <circle cx="80" cy="46" r="5" fill="#3a3a3a"/>
+  <text x="360" y="50" text-anchor="middle" fill="#8d8d8d" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12">menu bar</text>
+  <rect x="548" y="34" width="128" height="24" rx="6" fill="#161616" stroke="#6eedc6" stroke-opacity="0.55"/>
+  <text x="612" y="50" text-anchor="middle" fill="#6eedc6" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11">wifi-on-a-bar</text>
+
+  <rect x="24" y="88" width="208" height="72" rx="12" fill="#111" stroke="#1d1d1d"/>
+  <text x="128" y="116" text-anchor="middle" fill="#f3f3f3" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="600">Ping</text>
+  <text x="128" y="140" text-anchor="middle" fill="#6eedc6" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12">120 ms · tripped</text>
+
+  <rect x="256" y="88" width="208" height="72" rx="12" fill="#111" stroke="#1d1d1d"/>
+  <text x="360" y="116" text-anchor="middle" fill="#f3f3f3" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="600">Traffic</text>
+  <text x="360" y="140" text-anchor="middle" fill="#6eedc6" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12">5.0 Mbps · tripped</text>
+
+  <rect x="488" y="88" width="208" height="72" rx="12" fill="#111" stroke="#1d1d1d"/>
+  <text x="592" y="116" text-anchor="middle" fill="#f3f3f3" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="600">Signal</text>
+  <text x="592" y="140" text-anchor="middle" fill="#8d8d8d" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12">Excellent · not RSSI</text>
+
+  <text x="360" y="204" text-anchor="middle" fill="#f3f3f3" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="600">Saturated</text>
+  <text x="360" y="226" text-anchor="middle" fill="#8d8d8d" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12">Claude is filling the pipe. Nothing inside TLS.</text>
+</svg>
