@@ -46,6 +46,14 @@ const experience: CvItem[] = [
 
 const products: CvItem[] = [
   {
+    slug: "devwifi",
+    org: "DevWifiBar",
+    role: "Author",
+    period: "2026 — Present",
+    summary: "Native macOS menu bar that attributes uplink load to named AI processes. No TLS inspection.",
+    href: null,
+  },
+  {
     slug: "dripnex",
     org: "Dripnex",
     role: "Founder",

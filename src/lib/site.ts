@@ -68,6 +68,20 @@ export const site = {
 export const work = [
   {
     kind: "work" as const,
+    slug: "devwifi",
+    title: "DevWifiBar",
+    line: "Menu bar radar for AI traffic. Nothing inside TLS.",
+    started: 2026,
+    date: "2026-08-20",
+    year: "2026—",
+    href: null as string | null,
+    repo: "https://github.com/tomymaritano/devwibar",
+    cover: "/work/devwifi/cover.svg",
+    loop: undefined as string | undefined,
+    stills: ["/work/devwifi/radar.svg"],
+  },
+  {
+    kind: "work" as const,
     slug: "dripnex",
     title: "Dripnex",
     line: "AI note taker. SQLite now, sync next.",
@@ -393,15 +407,6 @@ export const work = [
 export const writing = [
   {
     kind: "writing" as const,
-    slug: "devwibar-tls",
-    title: "DevWifiBar does not open TLS",
-    line: "If signal is Excellent and ping is 120, the model filled the pipe.",
-    started: 2026,
-    date: "2026-08-20",
-    year: "2026",
-  },
-  {
-    kind: "writing" as const,
     slug: "grok-bot-and-cursor",
     title: "Grok 4.6 in Cursor is not Grok Bot",
     line: "One loop lives in the repo. The other has a computer.",
@@ -430,8 +435,8 @@ export const writing = [
   {
     kind: "writing" as const,
     slug: "claude-code-pm",
-    title: "Claude Code: Why Even Bother as a PM?",
-    line: "Prototype the spec before you file the ticket.",
+    title: "Claude Code is not a ticket translator",
+    line: "Prototype the spec before you file it.",
     started: 2025,
     date: "2025-10-03",
     year: "2025",
@@ -439,8 +444,8 @@ export const writing = [
   {
     kind: "writing" as const,
     slug: "threejs-sanity-integration",
-    title: "Three.js + Sanity CMS",
-    line: "3D scenes that stay editable.",
+    title: "The canvas does not wait on Sanity",
+    line: "Fetch first. Then mount WebGL.",
     started: 2025,
     date: "2025-07-04",
     year: "2025",
@@ -448,8 +453,8 @@ export const writing = [
   {
     kind: "writing" as const,
     slug: "cloudinary-migration",
-    title: "Migrating Images to Cloudinary",
-    line: "Repo size down 99.7%.",
+    title: "Binaries do not belong in git",
+    line: "450MB became 1.2MB. The hour was the cheap part.",
     started: 2025,
     date: "2025-07-03",
     year: "2025",
@@ -457,8 +462,8 @@ export const writing = [
   {
     kind: "writing" as const,
     slug: "ai-business-validation",
-    title: "How AI Helped Me Validate a Business Idea in One Week",
-    line: "A week of calls, not a month of nights.",
+    title: "The model did not replace the calls",
+    line: "A week of interviews, not a month of nights.",
     started: 2025,
     date: "2025-06-15",
     year: "2025",
@@ -473,6 +478,7 @@ export type IndexItem = WorkItem | WritingItem;
 export type WorkLane = "product" | "role" | "client";
 
 export const workLanes = {
+  devwifi: "product",
   dripnex: "product",
   psynth: "product",
   "quantis-intel": "product",

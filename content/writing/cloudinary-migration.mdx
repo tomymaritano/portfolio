@@ -1,22 +1,36 @@
 ---
-title: "Migrating Images to Cloudinary"
-line: Repo size down 99.7%.
+title: "Binaries do not belong in git"
+line: "450MB became 1.2MB. The hour was the cheap part."
 ---
 
-The git repo was 450MB. After moving images to Cloudinary it dropped to 1.2MB.
+The repo was 450MB. After the images left for [Cloudinary](https://cloudinary.com/) it was 1.2MB. That is not a migration story. That is git doing a job it was not asked to do.
 
 ## The problem
 
-Images in the repo look convenient. Then clone is slow, CI is slow, nothing is optimized, and binary diffs are noise.
+Images in the repo look convenient. Then clone is slow. CI is slow. Nothing is resized. Binary diffs are noise. Every pull is a tax on a PNG you already shipped.
 
-## Why Cloudinary
+## One hard decision
 
-Automatic format conversion (WebP, AVIF). On-the-fly resize. A CDN. A usable free tier. A clean Next.js path.
+Move the bytes. Keep the references. Bulk upload. Point `images.remotePatterns` at `res.cloudinary.com`. Wrap URLs in a helper. Search-and-replace. About an hour.
 
-## The move
+Cloudinary was the boring choice: WebP and AVIF on the way out, resize on the fly, a CDN, a usable free tier, a clean Next.js path. I did not need a second product. I needed the repo to be source again.
 
-Bulk upload. Point `images.remotePatterns` at `res.cloudinary.com`. Wrap URLs in a helper. Search-and-replace. About an hour.
+```mermaid
+flowchart LR
+  git[Git] --> code[Source]
+  cdn[Cloudinary] --> bytes[Bytes]
+  next[Next.js] --> cdn
+  next --> git
+```
 
-## Results
+Build went 3min → 45sec. Page load 2.4s → 0.8s with automatic WebP. The 99.7% drop is the clone. The hour is the cheap part.
 
-Repo 450MB → 1.2MB. Build 3min → 45sec. Page load 2.4s → 0.8s with automatic WebP. Worth the hour.
+## What I would not do again
+
+Commit a “just this hero.” The next one stays. Then CI is the product.
+
+Hand-resize three widths in `public/`. That is a CMS you will not finish.
+
+## The bar
+
+A repo you can clone. Images that arrive in the format the browser asked for. The last mile is still the same: a page someone will load — not a dump of the binary I call a commit.

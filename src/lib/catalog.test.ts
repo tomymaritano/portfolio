@@ -10,7 +10,7 @@ describe("catalog", () => {
     const catalog = listCatalog();
     expect(catalog.site.line).toMatch(/extract/i);
     expect(catalog.work.map((item) => item.slug)).toContain("dripnex");
-    expect(catalog.writing.map((item) => item.slug)).toContain("devwibar-tls");
+    expect(catalog.work.map((item) => item.slug)).toContain("devwifi");
     expect(catalog.writing.map((item) => item.slug)).toContain("grok-bot-and-cursor");
     const quantis = catalog.work.find((item) => item.slug === "quantis-intel");
     expect(quantis?.href).toBeNull();
