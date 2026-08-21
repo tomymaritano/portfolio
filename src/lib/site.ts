@@ -68,6 +68,20 @@ export const site = {
 export const work = [
   {
     kind: "work" as const,
+    slug: "devwifi",
+    title: "DevWifiBar",
+    line: "Menu bar radar for AI traffic. Nothing inside TLS.",
+    started: 2026,
+    date: "2026-08-20",
+    year: "2026—",
+    href: null as string | null,
+    repo: "https://github.com/tomymaritano/devwibar",
+    cover: "/work/devwifi/cover.svg",
+    loop: undefined as string | undefined,
+    stills: ["/work/devwifi/radar.svg"],
+  },
+  {
+    kind: "work" as const,
     slug: "dripnex",
     title: "Dripnex",
     line: "AI note taker. SQLite now, sync next.",
@@ -393,15 +407,6 @@ export const work = [
 export const writing = [
   {
     kind: "writing" as const,
-    slug: "devwibar-tls",
-    title: "DevWifiBar does not open TLS",
-    line: "If signal is Excellent and ping is 120, the model filled the pipe.",
-    started: 2026,
-    date: "2026-08-20",
-    year: "2026",
-  },
-  {
-    kind: "writing" as const,
     slug: "grok-bot-and-cursor",
     title: "Grok 4.6 in Cursor is not Grok Bot",
     line: "One loop lives in the repo. The other has a computer.",
@@ -473,6 +478,7 @@ export type IndexItem = WorkItem | WritingItem;
 export type WorkLane = "product" | "role" | "client";
 
 export const workLanes = {
+  devwifi: "product",
   dripnex: "product",
   psynth: "product",
   "quantis-intel": "product",
