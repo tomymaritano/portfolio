@@ -85,7 +85,7 @@ describe("cv data", () => {
     const data = cvData();
     const blob = JSON.stringify(data);
     expect(data.name).toBe("Tomás Maritano");
-    expect(data.title).toBe("Head of Engineering");
+    expect(data.title).toBe("Senior Full Stack Engineer");
     expect(data.summary).toMatch(/Psynth/);
     expect(data.education.school).toMatch(/Tecnológica Nacional/);
     expect(data.products.find((item) => item.slug === "quantis-intel")?.href).toBeNull();

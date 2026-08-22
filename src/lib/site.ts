@@ -11,7 +11,7 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/tomymaritano",
   photo: "/perfil.png",
   about: [
-    "I take a messy input and produce a document a person will send — not a dump of the model. I lead engineering at Psynth. I joined as a design engineer.",
+    "I take a messy input and produce a document a person will send — not a dump of the model. I'm a senior full-stack engineer at Psynth (sole lead on engineering). I joined as a design engineer.",
     "I was twelve, making brochure sites on a CMS. Client pages, not products. Buenos Aires. I studied at Universidad Tecnológica Nacional.",
     "Su Web Express hired me in 2017. Then Wolt in Copenhagen, Grandvalira in Andorra, Valere Realms, Unicoin in 2024. Frontend first, then the stack under it. I did not abandon the surface. I started owning what it sits on. I write when the decision is interesting.",
   ],
@@ -25,7 +25,7 @@ export const site = {
     {
       href: "https://psynth.ai",
       title: "Psynth",
-      lead: "I lead engineering at ",
+      lead: "Senior full-stack engineer (sole lead) at ",
       tail: ". Test results and intake become a draft the psychologist reviews and signs. I joined as a design engineer.",
     },
     {
@@ -98,7 +98,7 @@ export const work = [
     kind: "work" as const,
     slug: "psynth",
     title: "Psynth",
-    line: "Clinical reporting. I lead engineering.",
+    line: "Clinical reporting. Senior full-stack / sole lead.",
     started: 2026,
     date: "2026-08-01",
     year: "2026—",
@@ -552,7 +552,7 @@ function datedIndex<T extends IndexItem>(items: readonly T[]) {
 export const homeSlugs = ["psynth", "dripnex", "dolargaucho", "quantis-intel"] as const;
 
 export const homeMeta = {
-  psynth: { tag: "Clinical reporting", role: "Head of Engineering" },
+  psynth: { tag: "Clinical reporting", role: "Senior Full Stack Engineer" },
   dripnex: { tag: "AI notes" },
   dolargaucho: { tag: "AI finance" },
   "quantis-intel": { tag: "Financial reporting" },
