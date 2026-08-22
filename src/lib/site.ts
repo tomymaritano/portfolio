@@ -407,6 +407,15 @@ export const work = [
 export const writing = [
   {
     kind: "writing" as const,
+    slug: "the-note-came-first",
+    title: "The note came first. The names came in one night",
+    line: "I named the jobs in the order the surfaces split.",
+    started: 2026,
+    date: "2026-08-22",
+    year: "2026",
+  },
+  {
+    kind: "writing" as const,
     slug: "grok-bot-and-cursor",
     title: "Grok 4.6 in Cursor is not Grok Bot",
     line: "One loop lives in the repo. The other has a computer.",
