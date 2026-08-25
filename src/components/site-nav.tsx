@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { MobileNav } from "@/components/mobile-nav";
 import { NavLink, SocialLink } from "@/components/nav-link";
@@ -11,9 +12,17 @@ export function SiteNav() {
       style={{ viewTransitionName: "site-header" }}
     >
       <div className={`${shell} flex h-16 items-center justify-between`}>
-        <Link href="/" className="text-[14px] font-semibold tracking-tight transition-colors duration-200 hover:text-foreground sm:text-[15px]">
-          <span className="sm:hidden">{site.handle}</span>
-          <span className="hidden sm:inline">{site.name}</span>
+        <Link href="/" className="inline-flex items-center">
+          <Image
+            src={site.photo}
+            alt={site.name}
+            width={32}
+            height={32}
+            className="size-8 rounded-full object-cover object-[center_20%] md:hidden"
+          />
+          <span className="hidden text-[14px] font-semibold tracking-tight transition-colors duration-200 hover:text-foreground sm:text-[15px] md:inline">
+            {site.name}
+          </span>
         </Link>
         <nav aria-label="Site" className="hidden items-center gap-5 text-[13px] text-muted md:flex">
           <NavLink href="/work">Work</NavLink>

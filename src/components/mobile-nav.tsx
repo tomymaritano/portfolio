@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { HoverMorphIcon, ToggleMorphIcon } from "@/components/hover-morph-icon";
@@ -96,12 +97,14 @@ export function MobileNav() {
             style={{ viewTransitionName: "mobile-menu" }}
           >
             <div className="flex h-16 shrink-0 items-center justify-between px-5">
-              <Link
-                href="/"
-                onClick={() => setOpen(false)}
-                className="text-[14px] font-semibold tracking-tight"
-              >
-                {site.handle}
+              <Link href="/" onClick={() => setOpen(false)} className="inline-flex items-center">
+                <Image
+                  src={site.photo}
+                  alt={site.name}
+                  width={32}
+                  height={32}
+                  className="size-8 rounded-full object-cover object-[center_20%]"
+                />
               </Link>
               <button
                 type="button"
