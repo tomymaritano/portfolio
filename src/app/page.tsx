@@ -15,7 +15,7 @@ export default function HomePage() {
             width={208}
             height={208}
             priority
-            className="mx-auto mb-6 block size-32 rounded-full object-cover object-[center_20%] sm:float-right sm:mx-0 sm:mb-4 sm:ml-6 sm:size-40"
+            className="mx-auto mb-6 hidden size-32 rounded-full object-cover object-[center_20%] sm:float-right sm:mx-0 sm:mb-4 sm:ml-6 sm:size-40 md:block"
           />
           <h1 className="text-[2rem] leading-tight font-semibold tracking-tight text-foreground sm:text-[2.35rem]">
             {site.headline}
