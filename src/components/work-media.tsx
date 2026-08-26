@@ -8,7 +8,7 @@ export function WorkMedia({ item }: { item: WorkItem }) {
   return (
     <section className="mt-14" aria-label={`${item.title} product`}>
       {item.loop ? (
-        <div className="overflow-hidden rounded-2xl border border-line bg-card">
+        <div className="overflow-hidden rounded-2xl border border-white/14 bg-[#141414]">
           <div className="aspect-16/10">
             <MuteMedia src={item.loop} cover={item.cover} label={item.title} />
           </div>

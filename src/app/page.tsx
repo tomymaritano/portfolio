@@ -40,7 +40,7 @@ export default function HomePage() {
         <div className="clear-both" />
 
         <section className="reveal reveal-delay-2 mt-16">
-          <h2 className="text-xl font-semibold tracking-tight">Work</h2>
+          <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Work</h2>
           <p className="mt-5 text-[16px] leading-7 text-foreground/85">
             <Link href="/work/psynth" className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
               Psynth
@@ -68,12 +68,18 @@ export default function HomePage() {
         </section>
 
         <section className="reveal-view mt-16">
-          <h2 className="text-xl font-semibold tracking-tight">Stack</h2>
-          <ul className="mt-6 space-y-3 text-[15px] leading-7">
+          <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Stack</h2>
+          <ul className="mt-6 space-y-3 text-[16px] leading-7">
             {site.stack.map((row) => (
-              <li key={row.label} className="grid grid-cols-[6.75rem_1fr] gap-x-4 sm:grid-cols-[7.5rem_1fr]">
+              <li key={row.label} className="grid grid-cols-[5.75rem_1fr] items-baseline gap-x-4 sm:grid-cols-[6.5rem_1fr]">
                 <span className="text-muted">{row.label}</span>
-                <span className="text-foreground/85">{row.items.join(" · ")}</span>
+                <span className="flex flex-wrap gap-x-0 gap-y-1 text-foreground/85">
+                  {row.items.map((item) => (
+                    <span key={item} className="after:mx-2 after:text-muted after:content-['·'] last:after:content-none">
+                      {item}
+                    </span>
+                  ))}
+                </span>
               </li>
             ))}
           </ul>
