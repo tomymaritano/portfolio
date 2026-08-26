@@ -54,6 +54,10 @@ describe("site", () => {
   it("indexes published work and writing", () => {
     expect(workBySlug("dripnex")?.title).toBe("Dripnex");
     expect(workBySlug("dripnex")?.href).toBe("https://dripnex.app");
+    expect(workBySlug("dripnex")?.line).toBe("Hackable AI note taker. SQLite now, sync next.");
+    expect(workBySlug("dripnex")?.line).not.toMatch(/the file is the note/i);
+    expect(site.contributions[0]?.title).toBe("Dripnex");
+    expect(site.contributions[0]?.tail).toMatch(/hackable AI note taker/i);
     expect(workBySlug("psynth")?.title).toBe("Psynth");
     expect(workBySlug("readied")?.href).toBe("https://readied.app");
     expect(workBySlug("cairn")?.repo?.includes("github.com")).toBe(true);

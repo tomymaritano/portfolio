@@ -34,7 +34,7 @@ Psynth is written as systems and craft. **No PHI, no patient data, no internal c
 | `/` | About: H1, line, photo, bio, Work paragraph (Psynth, Dripnex, DolarGaucho, Quantis-intel), My work → `/work`, short stack. Follow X. No cards. |
 | `/about` | Permanent redirect to `/`. |
 | `/work` | Year list of every case. Dripnex first. |
-| `/work/dripnex` | Case: problem → what shipped → one hard decision → media. SQLite + sync, not offline. |
+| `/work/dripnex` | Case: problem → what shipped → one hard decision → media. Hackable AI note taker. SQLite + sync, not offline. |
 | `/work/psynth` | Same shape. No PHI. |
 | `/work/dolargaucho` | Same shape. AI finance. |
 | `/work/quantis-intel` | Same shape. Financial reporting with AI. |
@@ -47,7 +47,7 @@ The home **is** the about. No product tiles.
 
 1. **Identity** — H1, one line, photo, Follow on X.
 2. **Bio** — `site.about` paragraphs.
-3. **Work** — one paragraph naming Psynth (clinical reporting, lead engineering), Dripnex (AI notes), DolarGaucho (AI finance), Quantis-intel (financial reporting). Each name links to `/work/{slug}`. Text link “My work →” to `/work`.
+3. **Work** — one paragraph naming Psynth (clinical reporting, lead engineering), Dripnex (hackable AI note taker), DolarGaucho (AI finance), Quantis-intel (financial reporting). Each name links to `/work/{slug}`. Text link “My work →” to `/work`.
 4. **Stack** — short label / items rows. Colophon and email live in the footer.
 
 Do not label anything “Featured”. Do not put cards on `/`.
