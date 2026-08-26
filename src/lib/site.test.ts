@@ -1,5 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { homeWork, site, work, workBySlug, workIndex, workLanes, workSections, writingBySlug, writingIndex } from "./site";
+import {
+  homeSlugs,
+  homeWork,
+  isHomeSlug,
+  site,
+  work,
+  workBySlug,
+  workIndex,
+  workLanes,
+  workSections,
+  writingBySlug,
+  writingIndex,
+} from "./site";
 
 describe("site", () => {
   it("has public links", () => {
@@ -72,12 +84,32 @@ describe("site", () => {
     expect(projects.map((item) => item.slug)).not.toContain("claude-code-pm");
     expect(homeWork().map((item) => item.slug)).toEqual(["psynth", "dripnex", "dolargaucho", "quantis-intel"]);
     expect(workBySlug("quantis-intel")?.line).toBe("The financial report a desk will send.");
-    expect(notes[0]?.slug).toBe("grok-bot-and-cursor");
+    expect(notes[0]?.slug).toBe("the-note-came-first");
     expect(workLanes.devwifi).toBe("product");
     expect(notes.map((item) => item.slug)).toContain("section-generation-pipeline");
     expect(workLanes.dripnex).toBe("product");
     expect(workLanes.unicoin).toBe("role");
     expect(workLanes.billspace).toBe("client");
     expect(workSections().map((section) => section.lane)).toEqual(["product", "role", "client"]);
+  });
+
+  it("keeps the four spine products on /work selected, not in archive", () => {
+    expect([...homeSlugs]).toEqual(["psynth", "dripnex", "dolargaucho", "quantis-intel"]);
+    expect(homeWork().map((item) => item.slug)).toEqual([...homeSlugs]);
+    expect(isHomeSlug("dripnex")).toBe(true);
+    expect(isHomeSlug("readied")).toBe(false);
+    expect(homeWork().every((item) => item.cover || item.stills.length > 0)).toBe(true);
+
+    const archive = workSections().flatMap((section) => section.items.map((item) => item.slug));
+    expect(archive).not.toEqual(expect.arrayContaining([...homeSlugs]));
+    expect(archive).toContain("readied");
+    expect(archive).toContain("devwifi");
+    expect(archive).toContain("unicoin");
+    expect(archive).toContain("billspace");
+
+    const products = workSections().find((section) => section.lane === "product")?.items.map((item) => item.slug) ?? [];
+    expect(products[0]).toBe("devwifi");
+    expect(products).not.toContain("psynth");
+    expect(products).not.toContain("dripnex");
   });
 });
