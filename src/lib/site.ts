@@ -551,12 +551,18 @@ function datedIndex<T extends IndexItem>(items: readonly T[]) {
 
 export const homeSlugs = ["psynth", "dripnex", "dolargaucho", "quantis-intel"] as const;
 
+export type HomeSlug = (typeof homeSlugs)[number];
+
 export const homeMeta = {
   psynth: { tag: "Clinical reporting", role: "Senior Full Stack Engineer" },
   dripnex: { tag: "AI notes" },
   dolargaucho: { tag: "AI finance" },
   "quantis-intel": { tag: "Financial reporting" },
 } as const;
+
+export function isHomeSlug(slug: string): slug is HomeSlug {
+  return (homeSlugs as readonly string[]).includes(slug);
+}
 
 export function homeWork() {
   return homeSlugs.map((slug) => workBySlug(slug)).filter((item): item is WorkItem => item !== null);
@@ -577,7 +583,7 @@ export function workSections() {
     .map((lane) => ({
       lane,
       title: titles[lane],
-      items: datedIndex(work.filter((item) => workLanes[item.slug] === lane)),
+      items: datedIndex(work.filter((item) => workLanes[item.slug] === lane && !isHomeSlug(item.slug))),
     }))
     .filter((section) => section.items.length > 0);
 }

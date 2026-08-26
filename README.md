@@ -16,7 +16,7 @@ npm run mcp    # stdio MCP for Cursor
 | Path | What |
 | --- | --- |
 | `/` | About: photo, line, bio, Work paragraph, stack |
-| `/work` | Year list — Products / Roles / Clients |
+| `/work` | Selected (home spine) + archive year list |
 | `/work/{slug}` | Case |
 | `/writing` | Notes |
 | `/writing/{slug}` | Note |
