@@ -27,7 +27,7 @@ export function YearList({ items }: { items: readonly Row[] }) {
                 {item.title}
               </span>
             </ViewTransition>
-            <span className="hidden text-right text-muted transition-colors duration-200 group-hover:text-foreground/65 sm:block">
+            <span className="col-start-2 mt-0.5 text-[13px] leading-5 text-muted transition-colors duration-200 group-hover:text-foreground/65 sm:col-start-3 sm:mt-0 sm:text-right sm:text-[15px] sm:leading-normal">
               {item.line}
             </span>
           </Link>
