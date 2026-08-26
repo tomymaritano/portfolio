@@ -20,7 +20,7 @@ export const site = {
       href: "https://dripnex.app",
       title: "Dripnex",
       lead: "Built ",
-      tail: ", an AI note taker. SQLite now — local today so the same notes can sync when other surfaces ship.",
+      tail: ", a hackable AI note taker. SQLite now — local today so the same notes can sync when other surfaces ship.",
     },
     {
       href: "https://psynth.ai",
@@ -84,7 +84,7 @@ export const work = [
     kind: "work" as const,
     slug: "dripnex",
     title: "Dripnex",
-    line: "AI note taker. SQLite now, sync next.",
+    line: "Hackable AI note taker. SQLite now, sync next.",
     started: 2026,
     date: "2026-08-18",
     year: "2026—",
@@ -555,7 +555,7 @@ export type HomeSlug = (typeof homeSlugs)[number];
 
 export const homeMeta = {
   psynth: { tag: "Clinical reporting", role: "Senior Full Stack Engineer" },
-  dripnex: { tag: "AI notes" },
+  dripnex: { tag: "Hackable AI notes" },
   dolargaucho: { tag: "AI finance" },
   "quantis-intel": { tag: "Financial reporting" },
 } as const;

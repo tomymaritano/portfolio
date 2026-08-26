@@ -21,7 +21,12 @@ describe("catalog", () => {
   it("returns raw MDX for an entry", async () => {
     const entry = await getEntry("work", "dripnex");
     expect(entry?.title).toBe("Dripnex");
-    expect(entry?.body).toMatch(/SQLite/);
+    expect(entry?.line).toBe("Hackable AI note taker. SQLite now, sync next.");
+    expect(entry?.body).toMatch(/hackable AI note taker/i);
+    expect(entry?.body).toMatch(/SQLite is the source of truth/);
+    expect(entry?.body).toMatch(/init\.js/);
+    expect(entry?.body).not.toMatch(/the file is the note/i);
+    expect(entry?.body).not.toMatch(/no account/i);
     expect(await getEntry("work", "missing")).toBeNull();
   });
 });

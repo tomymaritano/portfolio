@@ -58,7 +58,7 @@ const products: CvItem[] = [
     org: "Dripnex",
     role: "Founder",
     period: "2026 — Present",
-    summary: "AI note-taking product. Local SQLite today; designed so the same notes can sync when other surfaces ship.",
+    summary: "Hackable AI note taker. SQLite on the machine; sync when those surfaces ship.",
     href: "https://dripnex.app",
   },
   {

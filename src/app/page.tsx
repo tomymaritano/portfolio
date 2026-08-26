@@ -50,7 +50,7 @@ export default function HomePage() {
             <Link href="/work/dripnex" className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
               Dripnex
             </Link>{" "}
-            is an AI note taker — SQLite now, sync when those surfaces ship.{" "}
+            is a hackable AI note taker — SQLite now, sync when those surfaces ship.{" "}
             <Link href="/work/dolargaucho" className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
               DolarGaucho
             </Link>{" "}
