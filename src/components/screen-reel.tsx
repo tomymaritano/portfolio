@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 const INTERVAL_MS = 3200;
 
@@ -13,11 +14,7 @@ export function ScreenReel({
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [reduce, setReduce] = useState(false);
-
-  useEffect(() => {
-    setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
+  const reduce = usePrefersReducedMotion();
 
   useEffect(() => {
     if (reduce || paused || frames.length < 2) return;
@@ -31,7 +28,7 @@ export function ScreenReel({
 
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-line bg-card"
+      className="relative overflow-hidden rounded-2xl border border-white/14 bg-[#141414]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -49,7 +46,7 @@ export function ScreenReel({
         ))}
       </div>
       {frames.length > 1 ? (
-        <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5" role="tablist" aria-label={label}>
+        <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2" role="tablist" aria-label={label}>
           {frames.map((src, i) => (
             <button
               key={`${i}-${src}`}
@@ -57,8 +54,8 @@ export function ScreenReel({
               role="tab"
               aria-selected={i === index}
               aria-label={`Screen ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all ${
-                i === index ? "w-4 bg-foreground" : "w-1.5 bg-foreground/35 hover:bg-foreground/60"
+              className={`h-2.5 rounded-full transition-all ${
+                i === index ? "w-6 bg-foreground" : "w-2.5 bg-foreground/45 hover:bg-foreground/75"
               }`}
               onClick={() => setIndex(i)}
             />

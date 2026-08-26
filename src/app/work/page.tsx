@@ -14,7 +14,7 @@ export default function WorkIndexPage() {
     <PageTransition>
       <PageFrame className="pt-10 pb-24">
         <section className="reveal">
-          <h2 className="mb-4 text-xl font-semibold tracking-tight">Selected</h2>
+          <h2 className="mb-4 font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Selected</h2>
           <ul className="grid gap-4 sm:grid-cols-2">
             {selected.map((item) => (
               <li key={item.slug}>
@@ -25,7 +25,7 @@ export default function WorkIndexPage() {
         </section>
         {archive.length > 0 ? (
           <section className="reveal-view mt-16">
-            <h2 className="text-xl font-semibold tracking-tight">Archive</h2>
+            <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Archive</h2>
             {archive.map((section, i) => (
               <div key={section.lane} className={i === 0 ? "mt-8" : "mt-16"}>
                 <h3 className="mb-4 text-[13px] text-muted">{section.title}</h3>

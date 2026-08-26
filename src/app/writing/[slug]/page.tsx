@@ -43,7 +43,7 @@ export default async function WritingPage({ params }: { params: Promise<{ slug: 
             <span>{frontmatter.line}</span>
           </p>
         </header>
-        <article className="prose-work mt-10 space-y-5 text-[16px] leading-7 text-foreground [&_a]:underline [&_a]:underline-offset-4 [&_code]:rounded [&_code]:bg-card [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[13px] [&_h2]:mt-12 [&_h2]:text-[1.35rem] [&_h2]:font-semibold [&_h2]:tracking-tight [&_li]:text-foreground/85 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-5 [&_p]:text-foreground/85 [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
+        <article className="prose-work mt-10 space-y-5 text-[16px] leading-7 text-foreground [&_a]:underline [&_a]:underline-offset-4 [&_code]:rounded [&_code]:bg-card [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[13px] [&_h2]:mt-12 [&_h2]:text-[1.5rem] [&_h2]:font-semibold [&_h2]:tracking-tight [&_li]:text-foreground/85 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-5 [&_p]:text-foreground/85 [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
           {content}
         </article>
         <div className="mt-16 text-[13px] text-muted">

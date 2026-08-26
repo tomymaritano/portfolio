@@ -47,7 +47,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             <span>{frontmatter.line}</span>
           </p>
         </header>
-        <article className="prose-work mt-10 space-y-5 text-[16px] leading-7 text-foreground [&_h2]:mt-12 [&_h2]:text-[1.35rem] [&_h2]:font-semibold [&_h2]:tracking-tight [&_p]:text-foreground/85 [&_em]:text-foreground">
+        <article className="prose-work mt-10 space-y-5 text-[16px] leading-7 text-foreground [&_h2]:mt-12 [&_h2]:text-[1.5rem] [&_h2]:font-semibold [&_h2]:tracking-tight [&_p]:text-foreground/85 [&_em]:text-foreground">
           {content}
         </article>
         {note ? (
