@@ -120,9 +120,9 @@ export function YearList({ items, spine = true }: { items: readonly Row[]; spine
       <p className="sr-only">On a keyboard, j and k move between rows once one is focused.</p>
       {spine ? <span data-archive-spine="" className="archive-spine" aria-hidden /> : null}
       {groups.map((group) => (
-        <div key={group.year} data-archive-group="" className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-4">
+        <div key={group.year} data-archive-group="" className="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-x-6">
           <div>
-            <p data-archive-year="" className="archive-year sticky top-20 pt-[0.85rem] text-[16px] tabular-nums">
+            <p data-archive-year="" className="archive-year sticky top-20 pt-4 text-[15px] tabular-nums">
               {group.year}
             </p>
           </div>
@@ -137,15 +137,15 @@ export function YearList({ items, spine = true }: { items: readonly Row[]; spine
                   onFocus={(event) => hair(event.currentTarget, true)}
                   onBlur={(event) => hair(event.currentTarget, false)}
                   aria-keyshortcuts="j k"
-                  className="year-row group relative grid min-h-11 cursor-pointer grid-cols-1 items-baseline gap-x-4 py-[0.85rem] text-[16px] sm:grid-cols-[minmax(0,1fr)_auto]"
+                  className="year-row group relative flex min-h-11 cursor-pointer flex-col py-4"
                 >
                   <span data-year-hair="" className="year-hair" aria-hidden />
                   <ViewTransition name={`${item.kind}-${item.slug}`} share="morph" default="none">
-                    <span className="text-pretty text-foreground transition-colors duration-200 group-hover:text-accent">
+                    <span className="text-pretty text-[16px] leading-snug text-foreground transition-colors duration-200 group-hover:text-accent">
                       {item.title}
                     </span>
                   </ViewTransition>
-                  <span className="mt-0.5 text-[13px] leading-5 text-muted transition-colors duration-200 group-hover:text-foreground/65 sm:mt-0 sm:text-right sm:text-[16px] sm:leading-normal">
+                  <span className="mt-1.5 max-w-[34rem] text-[14px] leading-6 text-muted transition-colors duration-200 group-hover:text-foreground/65">
                     {item.line}
                   </span>
                 </Link>
