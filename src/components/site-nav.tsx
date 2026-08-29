@@ -8,11 +8,11 @@ import { site } from "@/lib/site";
 export function SiteNav() {
   return (
     <header
-      className="site-header relative sticky top-0 border-b border-white/5 bg-background/70 backdrop-blur-xl"
+      className="site-header relative sticky top-0 border-b border-white/5 bg-background/70 pt-[env(safe-area-inset-top)] backdrop-blur-xl"
       style={{ viewTransitionName: "site-header" }}
     >
       <div className={`${shell} flex h-16 items-center justify-between`}>
-        <Link href="/" className="inline-flex items-center">
+        <Link href="/" transitionTypes={["nav-back"]} className="inline-flex items-center">
           <Image
             src={site.photo}
             alt={site.name}

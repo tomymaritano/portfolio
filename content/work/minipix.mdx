@@ -1,0 +1,18 @@
+---
+title: Minipix
+line: Same bytes in JS, Python, and Rust.
+---
+
+## Problem
+
+Image compression SDKs usually mean three SDKs. Node wraps one encoder. Python wraps another. Rust has a third. The bytes disagree. Someone "fixes" it in the app.
+
+## What I built
+
+One Rust core (`minipix-core`). npm, PyPI, crates.io. PNG, JPEG, WebP, AVIF. Same API, same engine, SHA-256 goldens in CI against all three bindings. A wasm playground that does not pretend to be native — the image never leaves the machine.
+
+## One hard decision
+
+Byte-identical across languages, or it is not the same product. Bindings call the core. They do not reimplement encode. [Wasm is not native](/writing/wasm-is-not-native): `mozjpeg` stays on the native path. [GPL is not a codec](/writing/gpl-is-not-a-codec): `cargo-deny` in CI, one documented MPL file.
+
+Repo at [github.com/tomymaritano/minipix](https://github.com/tomymaritano/minipix). Pre-release (`v0.1.0`).

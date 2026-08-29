@@ -50,6 +50,7 @@ export function catalogSite() {
     email: site.email,
     github: site.github,
     linkedin: site.linkedin,
+    url: site.url,
     about: [...site.about],
     stack: site.stack.map((row) => ({ label: row.label, items: [...row.items] })),
   };

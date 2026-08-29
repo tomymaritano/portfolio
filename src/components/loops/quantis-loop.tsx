@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 const ROWS = [
@@ -9,21 +10,24 @@ const ROWS = [
   { title: "Board draft", state: "idle" },
 ];
 
-export function QuantisLoop() {
+export function QuantisLoop({ paused = false }: { paused?: boolean }) {
   const [tick, setTick] = useState(0);
   const reduce = usePrefersReducedMotion();
 
-  useEffect(() => {
-    if (reduce) return;
-    const id = window.setInterval(() => setTick((n) => n + 1), 1500);
-    return () => window.clearInterval(id);
-  }, [reduce]);
+  useGSAP(
+    () => {
+      if (reduce || paused) return;
+      const beat = gsap.delayedCall(1.5, () => setTick((n) => n + 1));
+      return () => beat.kill();
+    },
+    { dependencies: [tick, paused, reduce] },
+  );
 
   const active = reduce ? ROWS.length : tick % (ROWS.length + 1);
   const width = reduce ? 72 : 28 + ((tick * 17) % 55);
 
   return (
-    <div className="flex h-full min-h-[200px] flex-col bg-[#0c0c0c] p-4" aria-hidden>
+    <div className="flex h-full flex-col bg-[#0c0c0c] p-4" aria-hidden>
       <p className="font-mono text-[10px] tracking-[0.16em] text-muted uppercase">Report / Q3</p>
       <p className="mt-2 text-[15px] font-medium">Drafting the pack</p>
       <div className="mt-4 h-1 overflow-hidden rounded-full bg-white/8">

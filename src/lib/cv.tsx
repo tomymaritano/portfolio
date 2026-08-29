@@ -86,6 +86,14 @@ const products: CvItem[] = [
     href: "https://react-cairn.vercel.app",
   },
   {
+    slug: "minipix",
+    org: "Minipix",
+    role: "Author",
+    period: "2026",
+    summary: "Image compression SDK. One Rust core with npm, PyPI, and crates.io bindings; SHA-256 goldens in CI.",
+    href: null,
+  },
+  {
     slug: "readied",
     org: "Readied",
     role: "Author",

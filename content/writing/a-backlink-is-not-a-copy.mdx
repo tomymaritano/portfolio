@@ -1,0 +1,41 @@
+---
+title: "A backlink is not a copy"
+line: "[[note title]] is Markdown. The graph is derived."
+---
+
+A graph store for notes looks complete. Then renaming a note is a rewrite of a second table, and export is missing the links. A wiki that persists backlinks as rows looks fast. Then you have two truths.
+
+[Dripnex](/work/dripnex) keeps the graph derived. The [writing page](https://github.com/dripnex/docs-site/blob/main/content/docs/writing-notes.mdx) is the contract: wikilinks are `[[note title]]` in the Markdown you typed. Backlinks are computed from your notes. They are not a second copy of the data.
+
+Tags are a different job — they [are not the body](/writing/tags-are-not-the-body). A wikilink *is* the words. What you persist as the string is written [elsewhere](/writing/the-file-is-the-export). This is the map.
+
+## The problem
+
+If backlinks are rows, a rename is two writes and they will disagree. If links live only in a database, export is a document without a graph. If you invent a proprietary link format, other tools cannot open the note.
+
+```mermaid
+flowchart LR
+  type[Wikilink in the body] --> sqlite[(SQLite)]
+  sqlite --> graph[Backlinks computed]
+  graph -.->|not a copy| type
+```
+
+Type `[[` and the editor offers matching titles. Click a `[[wikilink]]` and you go there. `@dripnex/wikilinks` parses as you type and resolves against the current note database. Highlighting is chrome. The characters stay in the body.
+
+Built-in plugins can render extra syntax — mermaid fences, `$math$`, GFM tables — without turning notes into a vendor format. You can turn them off. The notes remain Markdown. Embeds resolve in preview (YouTube, images). The editor still shows the raw URL.
+
+## One hard decision
+
+**A backlink is not a copy.** The link is the Markdown you typed. The graph is derived. Do not persist a second map that can lie.
+
+A pane you can throw away is honest. A table that claims to be the graph is a second product.
+
+## What I would not do again
+
+Store backlinks as rows so the sidebar is instant. Then a rename is two sources of truth, and export is missing the map.
+
+Invent a binary graph so "it's a real wiki." Then another editor cannot open the note.
+
+## The bar
+
+A `[[link]]` another editor can still read, and a backlink pane that can be recomputed. Docs: [writing notes](https://github.com/dripnex/docs-site/blob/main/content/docs/writing-notes.mdx). Live at [dripnex.app](https://dripnex.app).

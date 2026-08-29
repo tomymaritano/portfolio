@@ -1,0 +1,54 @@
+---
+title: "The write port is not the index"
+line: "get, save, delete. List and graph live on storage-core."
+---
+
+A domain that can `search()` looks complete. Then `createNote` imports FTS, and a unit test is a database. Putting the graph on `Note` looks honest. Then archive is a query, and the entity is an index.
+
+[Dripnex](/work/dripnex) keeps two ports. The [core page](https://github.com/dripnex/docs-site/blob/main/content/docs/architecture/core.mdx) is the write side: operations take a `NoteRepository`. The [storage page](https://github.com/dripnex/docs-site/blob/main/content/docs/architecture/storage.mdx) is the rest: `ExtendedNoteRepository` in `@dripnex/storage-core` is the query port the app actually uses.
+
+The renderer never seeing SQL is written [elsewhere](/writing/the-renderer-never-sees-sql). SQLite as the store is [elsewhere](/writing/sqlite-is-the-store). This is how the port is cut.
+
+## The problem
+
+If `createNoteOperation` can list, every write test stands up search. If core owns backlinks, the graph is a domain invariant and a derived view at once. If the desktop talks to `NoteRepository` only, the sidebar has no list.
+
+```mermaid
+flowchart LR
+  op[createNote / update / delete] --> write["NoteRepository"]
+  write --> get[get]
+  write --> save[save]
+  write --> del[delete]
+  app[Desktop] --> ext["ExtendedNoteRepository"]
+  ext --> list[list / search / count]
+  ext --> graph[tags / backlinks / graph]
+  write -.->|not this| ext
+```
+
+The write port is three methods:
+
+```ts
+interface NoteRepository {
+  get(id: NoteId): Promise<Note | null>;
+  save(note: Note): Promise<void>;
+  delete(id: NoteId): Promise<void>;
+}
+```
+
+List, search, counts, tags, backlinks, graph live on `ExtendedNoteRepository`. `SQLiteNoteRepository` implements that. Sync bookkeeping stays on the SQLite class, not on core. Native lives in one package — that cut is written [elsewhere](/writing/the-abi-is-not-the-domain).
+
+## One hard decision
+
+**The write port is not the index.** Domain operations get `get`, `save`, `delete`. The app lists through storage-core. Do not put search on `Note`. Do not make archive a core query.
+
+If create cannot run without FTS, it is not this core.
+
+## What I would not do again
+
+Give operations `listNotes` so "the domain can show a sidebar." Then a create test is an index, and the index is a second product.
+
+Put backlinks on the write port because "links are data." The link is in the Markdown. The graph is derived. That cut is written [elsewhere](/writing/a-backlink-is-not-a-copy).
+
+## The bar
+
+An operation you can test with a fake `save`, and a sidebar that does not live in `@dripnex/core`. Internals: [core](https://github.com/dripnex/docs-site/blob/main/content/docs/architecture/core.mdx) · [storage](https://github.com/dripnex/docs-site/blob/main/content/docs/architecture/storage.mdx). Live at [dripnex.app](https://dripnex.app).

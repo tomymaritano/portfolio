@@ -2,20 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageFrame } from "@/components/page-frame";
 import { PageTransition } from "@/components/page-transition";
+import { Reveal, StaggerIn } from "@/components/reveal";
 import { site } from "@/lib/site";
 
 export default function HomePage() {
   return (
     <PageTransition>
       <PageFrame className="pt-12 pb-24">
-        <header className="reveal">
+        <Reveal as="header">
           <Image
             src={site.photo}
             alt={site.name}
             width={208}
             height={208}
             priority
-            className="mx-auto mb-6 hidden size-32 rounded-full object-cover object-[center_20%] sm:float-right sm:mx-0 sm:mb-4 sm:ml-6 sm:size-40 md:block"
+            className="mx-auto mb-6 size-28 rounded-full object-cover object-[center_20%] sm:float-right sm:mx-0 sm:mb-4 sm:ml-6 sm:size-40"
           />
           <h1 className="text-[2rem] leading-tight font-semibold tracking-tight text-foreground sm:text-[2.35rem]">
             {site.headline}
@@ -30,32 +31,32 @@ export default function HomePage() {
               CV
             </a>
           </p>
-        </header>
+        </Reveal>
 
-        <div className="reveal reveal-delay-1 mt-10 space-y-5 text-[16px] leading-7 text-foreground/85">
+        <Reveal delay={0.08} className="mt-10 space-y-5 text-[16px] leading-7 text-foreground/85">
           {site.about.map((p) => (
             <p key={p}>{p}</p>
           ))}
-        </div>
+        </Reveal>
         <div className="clear-both" />
 
-        <section className="reveal reveal-delay-2 mt-16">
+        <Reveal as="section" delay={0.16} className="mt-16">
           <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Work</h2>
           <p className="mt-5 text-[16px] leading-7 text-foreground/85">
-            <Link href="/work/psynth" className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
+            <Link href="/work/psynth" transitionTypes={["nav-forward"]} className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
               Psynth
             </Link>{" "}
             is clinical reporting: test results and intake become a draft the psychologist reviews and
             signs.{" "}
-            <Link href="/work/dripnex" className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
+            <Link href="/work/dripnex" transitionTypes={["nav-forward"]} className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
               Dripnex
             </Link>{" "}
             is a hackable AI note taker — SQLite now, sync when those surfaces ship.{" "}
-            <Link href="/work/dolargaucho" className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
+            <Link href="/work/dolargaucho" transitionTypes={["nav-forward"]} className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
               DolarGaucho
             </Link>{" "}
             is quotes and a model that reads the Argentine week.{" "}
-            <Link href="/work/quantis-intel" className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
+            <Link href="/work/quantis-intel" transitionTypes={["nav-forward"]} className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
               Quantis-intel
             </Link>{" "}
             is the financial report a desk will send.
@@ -65,11 +66,13 @@ export default function HomePage() {
               My work →
             </Link>
           </p>
-        </section>
+        </Reveal>
 
-        <section className="reveal-view mt-16">
-          <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Stack</h2>
-          <ul className="mt-6 space-y-3 text-[16px] leading-7">
+        <section className="mt-16">
+          <Reveal as="h2" delay={0.2} className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
+            Stack
+          </Reveal>
+          <StaggerIn as="ul" className="mt-6 space-y-3 text-[16px] leading-7" y={8}>
             {site.stack.map((row) => (
               <li key={row.label} className="grid grid-cols-[5.75rem_1fr] items-baseline gap-x-4 sm:grid-cols-[6.5rem_1fr]">
                 <span className="text-muted">{row.label}</span>
@@ -82,7 +85,7 @@ export default function HomePage() {
                 </span>
               </li>
             ))}
-          </ul>
+          </StaggerIn>
         </section>
       </PageFrame>
     </PageTransition>

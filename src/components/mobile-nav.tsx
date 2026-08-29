@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { HoverMorphIcon, ToggleMorphIcon } from "@/components/hover-morph-icon";
 import { navMarks } from "@/components/nav-icons";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 import { site } from "@/lib/site";
 
@@ -21,6 +22,8 @@ export function MobileNav() {
   const router = useRouter();
   const panelId = useId();
   const reduce = usePrefersReducedMotion();
+  const trigger = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
 
   useEffect(() => {
     setOpen(false);
@@ -61,8 +64,11 @@ export function MobileNav() {
   useEffect(() => {
     if (phase === "closed") {
       delete document.body.dataset.menu;
+      if (wasOpen.current) trigger.current?.focus();
+      wasOpen.current = false;
       return;
     }
+    wasOpen.current = true;
     document.body.dataset.menu = phase;
 
     const onKey = (event: KeyboardEvent) => {
@@ -85,75 +91,21 @@ export function MobileNav() {
   }, []);
 
   const sheet =
-    phase !== "closed"
-      ? createPortal(
-          <div
-            id={panelId}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Menu"
-            data-state={phase}
-            className="menu-sheet fixed inset-0 z-50 flex flex-col bg-background md:hidden"
-            style={{ viewTransitionName: "mobile-menu" }}
-          >
-            <div className="flex h-16 shrink-0 items-center justify-between px-5">
-              <Link href="/" onClick={() => setOpen(false)} className="inline-flex items-center">
-                <Image
-                  src={site.photo}
-                  alt={site.name}
-                  width={32}
-                  height={32}
-                  className="size-8 rounded-full object-cover object-[center_20%]"
-                />
-              </Link>
-              <button
-                type="button"
-                aria-label="Close menu"
-                onClick={() => setOpen(false)}
-                className="inline-flex size-11 items-center justify-center text-foreground"
-              >
-                <ToggleMorphIcon rest={navMarks.menu.rest} hover={navMarks.menu.hover} on={phase === "open"} />
-              </button>
-            </div>
-            <nav className="flex min-h-0 flex-1 flex-col px-5 pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
-              <div className="flex flex-col">
-                <SheetLink
-                  href="/work"
-                  delay="menu-item-1"
-                  active={pathname.startsWith("/work")}
-                  same={pathname === "/work"}
-                  reduce={reduce}
-                  onPick={() => setOpen(false)}
-                  onGo={(href) => router.push(href, { transitionTypes: ["nav-forward"] })}
-                >
-                  Work
-                </SheetLink>
-                <SheetLink
-                  href="/writing"
-                  delay="menu-item-2"
-                  active={pathname.startsWith("/writing")}
-                  same={pathname === "/writing"}
-                  reduce={reduce}
-                  onPick={() => setOpen(false)}
-                  onGo={(href) => router.push(href, { transitionTypes: ["nav-forward"] })}
-                >
-                  Writing
-                </SheetLink>
-              </div>
-              <div className="menu-item menu-item-3 mt-auto grid grid-cols-3 gap-2 border-t border-white/5 pt-5">
-                <SheetSocial href={site.github} label="GitHub" mark="github" />
-                <SheetSocial href={site.linkedin} label="LinkedIn" mark="linkedin" />
-                <SheetSocial href={site.x} label="X" mark="x" />
-              </div>
-            </nav>
-          </div>,
-          document.body,
-        )
-      : null;
+    phase !== "closed" ? (
+      <MenuSheet
+        panelId={panelId}
+        phase={phase}
+        pathname={pathname}
+        reduce={reduce}
+        onClose={() => setOpen(false)}
+        onGo={(href) => router.push(href, { transitionTypes: ["nav-forward"] })}
+      />
+    ) : null;
 
   return (
     <div className="md:hidden">
       <button
+        ref={trigger}
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
@@ -168,9 +120,142 @@ export function MobileNav() {
   );
 }
 
+function MenuSheet({
+  panelId,
+  phase,
+  pathname,
+  reduce,
+  onClose,
+  onGo,
+}: {
+  panelId: string;
+  phase: Exclude<SheetPhase, "closed">;
+  pathname: string;
+  reduce: boolean;
+  onClose: () => void;
+  onGo: (href: string) => void;
+}) {
+  const root = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const el = root.current;
+      if (!el) return;
+      const items = el.querySelectorAll<HTMLElement>("[data-menu-item]");
+      if (reduce) {
+        gsap.set(el, { clearProps: "opacity" });
+        gsap.set(items, { clearProps: "opacity,transform" });
+        return;
+      }
+      if (phase === "opening") {
+        gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.22, ease: "power2.out" });
+        gsap.fromTo(
+          items,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.42, stagger: 0.07, ease: "power2.out" },
+        );
+        return;
+      }
+      if (phase === "closing") {
+        gsap.to(items, { opacity: 0, y: 8, duration: 0.18, stagger: 0.04, ease: "power2.in" });
+        gsap.to(el, { opacity: 0, duration: 0.28, ease: "power2.in" });
+      }
+    },
+    { scope: root, dependencies: [phase, reduce] },
+  );
+
+  useLayoutEffect(() => {
+    const node = root.current;
+    if (!node) return;
+    const focusables = [...node.querySelectorAll<HTMLElement>("a, button")];
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    node.querySelector<HTMLButtonElement>("[data-menu-close]")?.focus();
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Tab" || focusables.length === 0) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    node.addEventListener("keydown", onKey);
+    return () => node.removeEventListener("keydown", onKey);
+  }, []);
+
+  return createPortal(
+    <div
+      ref={root}
+      id={panelId}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu"
+      data-state={phase}
+      className="menu-sheet fixed inset-0 z-50 flex flex-col bg-background md:hidden"
+      style={{ viewTransitionName: "mobile-menu" }}
+    >
+      <div className="flex min-h-16 shrink-0 items-center justify-between px-5 pt-[env(safe-area-inset-top)]">
+        <Link href="/" transitionTypes={["nav-back"]} onClick={onClose} className="inline-flex items-center">
+          <Image
+            src={site.photo}
+            alt={site.name}
+            width={32}
+            height={32}
+            className="size-8 rounded-full object-cover object-[center_20%]"
+          />
+        </Link>
+        <button
+          type="button"
+          data-menu-close=""
+          aria-label="Close menu"
+          onClick={onClose}
+          className="inline-flex size-11 items-center justify-center text-foreground"
+        >
+          <ToggleMorphIcon rest={navMarks.menu.rest} hover={navMarks.menu.hover} on={phase === "open"} />
+        </button>
+      </div>
+      <nav className="flex min-h-0 flex-1 flex-col px-5 pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+        <div className="flex flex-col">
+          <SheetLink
+            href="/work"
+            active={pathname.startsWith("/work")}
+            same={pathname === "/work"}
+            reduce={reduce}
+            onPick={onClose}
+            onGo={onGo}
+          >
+            Work
+          </SheetLink>
+          <SheetLink
+            href="/writing"
+            active={pathname.startsWith("/writing")}
+            same={pathname === "/writing"}
+            reduce={reduce}
+            onPick={onClose}
+            onGo={onGo}
+          >
+            Writing
+          </SheetLink>
+        </div>
+        <div
+          data-menu-item=""
+          className="menu-item mt-auto grid grid-cols-3 gap-2 border-t border-white/5 pt-5"
+        >
+          <SheetSocial href={site.github} label="GitHub" mark="github" />
+          <SheetSocial href={site.linkedin} label="LinkedIn" mark="linkedin" />
+          <SheetSocial href={site.x} label="X" mark="x" />
+        </div>
+      </nav>
+    </div>,
+    document.body,
+  );
+}
+
 function SheetLink({
   href,
-  delay,
   active,
   same,
   reduce,
@@ -179,7 +264,6 @@ function SheetLink({
   children,
 }: {
   href: string;
-  delay: "menu-item-1" | "menu-item-2";
   active: boolean;
   same: boolean;
   reduce: boolean;
@@ -190,6 +274,7 @@ function SheetLink({
   return (
     <Link
       href={href}
+      data-menu-item=""
       transitionTypes={["nav-forward"]}
       onClick={(event) => {
         event.preventDefault();
@@ -201,7 +286,7 @@ function SheetLink({
         }
         window.setTimeout(() => onGo(href), EXIT_MS);
       }}
-      className={`menu-item ${delay} flex min-h-16 items-center text-[2rem] leading-none font-semibold tracking-tight transition-colors duration-200 ${
+      className={`menu-item flex min-h-16 items-center text-[2rem] leading-none font-semibold tracking-tight transition-colors duration-200 ${
         active ? "text-foreground" : "text-muted hover:text-foreground"
       }`}
     >

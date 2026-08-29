@@ -8,7 +8,7 @@ const iconProps = {
   strokeWidth: 1.75,
   color: "currentColor",
   spring,
-  reducedMotion: "never" as const,
+  reducedMotion: "user" as const,
   className: "overflow-visible",
 };
 

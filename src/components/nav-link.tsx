@@ -46,7 +46,7 @@ export function SocialLink({
       rel="noreferrer"
       aria-label={named ? undefined : label}
       className={`inline-flex text-muted transition-colors duration-200 hover:text-foreground ${
-        named ? "items-center gap-2" : "-m-2 size-9 items-center justify-center"
+        named ? "items-center gap-2" : "size-11 items-center justify-center"
       }`}
       onPointerEnter={() => setOver(true)}
       onPointerLeave={() => setOver(false)}

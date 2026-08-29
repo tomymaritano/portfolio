@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 const ROWS = [
@@ -9,20 +10,23 @@ const ROWS = [
   { title: "Export", state: "idle" },
 ];
 
-export function PsynthLoop() {
+export function PsynthLoop({ paused = false }: { paused?: boolean }) {
   const [tick, setTick] = useState(0);
   const reduce = usePrefersReducedMotion();
 
-  useEffect(() => {
-    if (reduce) return;
-    const id = window.setInterval(() => setTick((n) => n + 1), 1600);
-    return () => window.clearInterval(id);
-  }, [reduce]);
+  useGSAP(
+    () => {
+      if (reduce || paused) return;
+      const beat = gsap.delayedCall(1.6, () => setTick((n) => n + 1));
+      return () => beat.kill();
+    },
+    { dependencies: [tick, paused, reduce] },
+  );
 
   const active = reduce ? ROWS.length : tick % (ROWS.length + 1);
 
   return (
-    <div className="flex h-full min-h-[200px] bg-[#0c0c0c]" aria-hidden>
+    <div className="flex h-full bg-[#0c0c0c]" aria-hidden>
       <aside className="hidden w-[120px] border-r border-line p-3 text-[11px] text-muted sm:block">
         <p className="mb-3 text-[13px] text-foreground">Psynth</p>
         <p className="rounded-md bg-white/10 px-2 py-1 text-foreground">Reports</p>

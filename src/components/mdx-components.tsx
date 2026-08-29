@@ -1,5 +1,8 @@
 import type { ComponentProps, ReactNode } from "react";
+import Link from "next/link";
+import { CodeBlock, HeadingAnchor } from "@/components/copy-control";
 import { Mermaid } from "@/components/mermaid";
+import { fenceLanguage } from "@/lib/copy";
 
 function mermaidSource(node: ReactNode): string | null {
   if (!node || typeof node !== "object" || !("props" in node)) return null;
@@ -9,24 +12,91 @@ function mermaidSource(node: ReactNode): string | null {
   return typeof body === "string" ? body : Array.isArray(body) ? body.join("") : null;
 }
 
+function codeClassName(node: ReactNode): string | undefined {
+  if (Array.isArray(node)) return node.map(codeClassName).find(Boolean);
+  if (!node || typeof node !== "object" || !("props" in node)) return undefined;
+  return (node as { props: { className?: string } }).props.className;
+}
+
+function textOf(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(textOf).join("");
+  if (typeof node === "object" && "props" in node) {
+    return textOf((node as { props: { children?: ReactNode } }).props.children);
+  }
+  return "";
+}
+
+function headingId(node: ReactNode) {
+  const slug = textOf(node)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return slug || undefined;
+}
+
 export const mdxComponents = {
   Mermaid,
-  img: (props: ComponentProps<"img">) => (
+  h2: ({ children, id, ...props }: ComponentProps<"h2">) => {
+    const slug = id ?? headingId(children);
+    return (
+      <h2 id={slug} {...props}>
+        {children}
+        {slug ? <HeadingAnchor slug={slug} /> : null}
+      </h2>
+    );
+  },
+  h3: ({ children, id, ...props }: ComponentProps<"h3">) => {
+    const slug = id ?? headingId(children);
+    return (
+      <h3 id={slug} {...props}>
+        {children}
+        {slug ? <HeadingAnchor slug={slug} /> : null}
+      </h3>
+    );
+  },
+  a: ({ href, children, ...props }: ComponentProps<"a">) => {
+    if (!href) return <a {...props}>{children}</a>;
+    if (/^https?:\/\//i.test(href)) {
+      return (
+        <a {...props} href={href} target="_blank" rel="noreferrer">
+          {children}
+        </a>
+      );
+    }
+    if (href.startsWith("/")) {
+      return (
+        <Link {...props} href={href} transitionTypes={["nav-forward"]}>
+          {children}
+        </Link>
+      );
+    }
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    );
+  },
+  img: ({ alt, ...props }: ComponentProps<"img">) => (
     <img
       {...props}
+      alt={alt ?? ""}
       className="my-8 w-full rounded-xl border border-line bg-card"
     />
+  ),
+  table: (props: ComponentProps<"table">) => (
+    <div className="my-6 overflow-x-auto">
+      <table {...props} />
+    </div>
   ),
   pre: ({ children, ...props }: ComponentProps<"pre">) => {
     const chart = mermaidSource(children);
     if (chart) return <Mermaid chart={chart} />;
     return (
-      <pre
-        {...props}
-        className="my-6 overflow-x-auto rounded-xl border border-line bg-card p-4 font-mono text-[13px] leading-6 text-foreground/85"
-      >
+      <CodeBlock source={textOf(children)} language={fenceLanguage(codeClassName(children))} {...props}>
         {children}
-      </pre>
+      </CodeBlock>
     );
   },
 };

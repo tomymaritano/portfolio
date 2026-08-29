@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 export function MuteMedia({
   src,
@@ -11,16 +11,12 @@ export function MuteMedia({
   cover?: string;
   label: string;
 }) {
-  const [reduce, setReduce] = useState(false);
-
-  useEffect(() => {
-    setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
+  const reduce = usePrefersReducedMotion();
 
   if (!src || reduce) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      cover ? <img src={cover} alt="" className="h-full w-full object-cover" /> : null
+      cover ? <img src={cover} alt="" aria-hidden className="h-full w-full object-cover" /> : null
     );
   }
 

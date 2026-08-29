@@ -9,7 +9,7 @@ export function PageFrame({
   className?: string;
 }) {
   return (
-    <main id="main" className={`${shell} flex-1 ${className}`}>
+    <main id="main" tabIndex={-1} className={`${shell} flex-1 ${className}`}>
       {children}
     </main>
   );

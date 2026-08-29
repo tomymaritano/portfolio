@@ -9,10 +9,10 @@ Notes either sit in a vendor cloud or in a folder with no path to other surfaces
 
 ## What I built
 
-A hackable AI note taker. SQLite on the machine. Packs and plugins are git repos you can open — init.js. Sync when those surfaces ship. The open-source core lives in [readide](https://github.com/dripnex/readide).
+A hackable AI note taker. SQLite on the machine. The note body is raw markdown — never auto-modified, never reconstructed from a tree. `.md` is export, not identity. Packs and plugins are git repos you can open — init.js. Sync is optional; Don't Sync is valid. The open-source core lives in [readide](https://github.com/dripnex/readide).
 
 ## One hard decision
 
-SQLite is the source of truth. Plain files are easy to romanticize. A local database is what you can sync later without a migration story. The other surfaces are not shipping yet. The store should not wait on them.
+SQLite is the source of truth. Plain files are easy to romanticize. A local database is what you can sync later without a migration story. Don't Sync is valid. The store should not wait on a cloud.
 
 Live at [dripnex.app](https://dripnex.app). Core: [github.com/dripnex/readide](https://github.com/dripnex/readide).

@@ -11,10 +11,12 @@
     "mcp": "tsx src/mcp/server.ts"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@modelcontextprotocol/sdk": "^1.30.0",
     "@react-pdf/renderer": "^4.6.1",
     "@vercel/analytics": "^2.0.1",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.15.0",
     "lucide": "^1.33.0",
     "mermaid": "^11.16.1",
     "morphicons": "^1.7.0",

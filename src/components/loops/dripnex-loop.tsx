@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 const NOTES = [
@@ -11,20 +12,23 @@ const NOTES = [
 
 const TASKS = ["Slash menu", "Alerts", "Task list", "Outline"];
 
-export function DripnexLoop() {
+export function DripnexLoop({ paused = false }: { paused?: boolean }) {
   const [tick, setTick] = useState(0);
   const reduce = usePrefersReducedMotion();
 
-  useEffect(() => {
-    if (reduce) return;
-    const id = window.setInterval(() => setTick((n) => n + 1), 1400);
-    return () => window.clearInterval(id);
-  }, [reduce]);
+  useGSAP(
+    () => {
+      if (reduce || paused) return;
+      const beat = gsap.delayedCall(1.4, () => setTick((n) => n + 1));
+      return () => beat.kill();
+    },
+    { dependencies: [tick, paused, reduce] },
+  );
 
   const done = reduce ? 3 : tick % 5;
 
   return (
-    <div className="flex h-full min-h-[240px] bg-[#121212] text-[11px]" aria-hidden>
+    <div className="flex h-full bg-[#121212] text-[11px]" aria-hidden>
       <aside className="hidden w-[108px] shrink-0 border-r border-white/6 bg-[#161616] p-2.5 sm:block">
         <p className="mb-3 text-[12px] text-white/80">Notes</p>
         <p className="rounded-md bg-[#ff8a1e]/15 px-2 py-1 text-[#ff8a1e]">Active</p>
