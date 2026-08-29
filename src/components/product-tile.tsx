@@ -37,6 +37,7 @@ export function ProductTile({ item }: { item: WorkItem }) {
 
   useGSAP(
     (_ctx, contextSafe) => {
+      if (!contextSafe) return;
       animate.current = contextSafe((on: boolean) => {
         const el = root.current;
         if (!el || reduced) return;

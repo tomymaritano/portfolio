@@ -5,11 +5,11 @@ export const size = ogSize;
 export const contentType = ogType;
 
 export async function generateImageMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const item = workBySlug(slug);
+  const { slug } = (await params) ?? { slug: "" };
+  const item = slug ? workBySlug(slug) : null;
   return [
     {
-      id: slug,
+      id: "og",
       alt: item ? `${item.title} — ${item.line}` : "Work",
       size: ogSize,
       contentType: ogType,
