@@ -20,21 +20,50 @@ function ensureMermaid() {
   mermaid.initialize({
     startOnLoad: false,
     theme: "dark",
+    look: "classic",
     securityLevel: "strict",
     fontFamily: "ui-sans-serif, system-ui, sans-serif",
+    flowchart: {
+      useMaxWidth: false,
+      htmlLabels: true,
+      curve: "basis",
+      padding: 12,
+      nodeSpacing: 28,
+      rankSpacing: 36,
+      wrappingWidth: 140,
+    },
     themeVariables: {
-      background: "#111111",
-      primaryColor: "#1a1a1a",
-      primaryTextColor: "#ededed",
-      primaryBorderColor: "#333333",
-      lineColor: "#888888",
-      secondaryColor: "#161616",
-      tertiaryColor: "#0a0a0a",
-      nodeTextColor: "#ededed",
-      edgeLabelBackground: "#111111",
+      background: "#0c0c0c",
+      mainBkg: "#0c0c0c",
+      primaryColor: "#141414",
+      primaryTextColor: "#f3f3f3",
+      primaryBorderColor: "#2a2a2a",
+      secondaryColor: "#111111",
+      tertiaryColor: "#050505",
+      lineColor: "#6e6e6e",
+      textColor: "#f3f3f3",
+      nodeTextColor: "#f3f3f3",
+      clusterBkg: "#0c0c0c",
+      clusterBorder: "#2a2a2a",
+      titleColor: "#f3f3f3",
+      edgeLabelBackground: "#0c0c0c",
+      actorBkg: "#141414",
+      actorBorder: "#2a2a2a",
+      actorTextColor: "#f3f3f3",
     },
   });
   started = true;
+}
+
+function fitSvg(svg: string) {
+  return svg.replace(/<svg\b([^>]*)>/i, (_full, attrs: string) => {
+    let next = String(attrs)
+      .replace(/\s(?:width|height)="[^"]*"/gi, "")
+      .replace(/\sstyle="[^"]*"/i, "");
+    if (!/\baria-hidden=/i.test(next)) next += ' aria-hidden="true"';
+    if (!/\bpreserveAspectRatio=/i.test(next)) next += ' preserveAspectRatio="xMidYMid meet"';
+    return `<svg${next}>`;
+  });
 }
 
 export function Mermaid({ chart }: { chart: string }) {
@@ -50,7 +79,7 @@ export function Mermaid({ chart }: { chart: string }) {
     mermaid
       .render(`diagram-${rawId}`, chart.trim())
       .then((result) => {
-        if (!cancelled) setSvg(result.svg.replace("<svg", '<svg aria-hidden="true"'));
+        if (!cancelled) setSvg(fitSvg(result.svg));
       })
       .catch(() => {
         if (!cancelled) setFailed(true);
@@ -64,32 +93,11 @@ export function Mermaid({ chart }: { chart: string }) {
     () => {
       const el = figure.current;
       if (!el || !svg) return;
-      const nodes = el.querySelectorAll<SVGElement>(".node, .cluster");
-      const edges = el.querySelectorAll<SVGElement>(".edgePath, .flowchart-link");
       if (reduced) {
         gsap.set(el, { clearProps: "opacity,transform" });
-        gsap.set(nodes, { clearProps: "opacity,transform" });
-        gsap.set(edges, { clearProps: "opacity" });
         return;
       }
-      const tl = gsap.timeline();
-      tl.fromTo(el, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
-      if (nodes.length) {
-        tl.fromTo(
-          nodes,
-          { opacity: 0, y: 6 },
-          { opacity: 1, y: 0, duration: 0.4, stagger: 0.045, ease: "power2.out" },
-          "-=0.18",
-        );
-      }
-      if (edges.length) {
-        tl.fromTo(
-          edges,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.32, stagger: 0.02, ease: "power2.out" },
-          "-=0.22",
-        );
-      }
+      gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.out" });
     },
     { scope: figure, dependencies: [svg, reduced] },
   );
@@ -99,19 +107,19 @@ export function Mermaid({ chart }: { chart: string }) {
   }
 
   return (
-    <div className="code-block my-8">
+    <div className="code-block diagram-block my-8">
       {svg ? (
         <figure
           ref={figure}
           data-diagram=""
           role="img"
           aria-label={diagramLabel(chart)}
-          className="overflow-x-auto rounded-xl border border-line bg-card p-4 pr-12 [&_svg]:mx-auto [&_svg]:max-w-full [&_svg]:pointer-events-none"
+          className="diagram-frame"
           dangerouslySetInnerHTML={{ __html: svg }}
         />
       ) : (
         <figure
-          className="min-h-40 rounded-xl border border-line bg-card p-4 pr-12"
+          className="diagram-frame diagram-frame-pending"
           aria-busy="true"
           aria-label={`Loading ${diagramLabel(chart).toLowerCase()}`}
         />
