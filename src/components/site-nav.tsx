@@ -24,12 +24,16 @@ export function SiteNav() {
             {site.name}
           </span>
         </Link>
-        <nav aria-label="Site" className="hidden items-center gap-5 text-[13px] text-muted md:flex">
-          <NavLink href="/work">Work</NavLink>
-          <NavLink href="/writing">Writing</NavLink>
-          <SocialLink href={site.github} label="GitHub" mark="github" />
-          <SocialLink href={site.linkedin} label="LinkedIn" mark="linkedin" />
-          <SocialLink href={site.x} label="Follow on X" mark="x" />
+        <nav aria-label="Site" className="hidden items-center text-[13px] text-muted md:flex">
+          <div className="flex items-center gap-5">
+            <NavLink href="/work">Work</NavLink>
+            <NavLink href="/writing">Writing</NavLink>
+          </div>
+          <div className="ml-3 flex items-center">
+            <SocialLink href={site.github} label="GitHub" mark="github" />
+            <SocialLink href={site.linkedin} label="LinkedIn" mark="linkedin" />
+            <SocialLink href={site.x} label="Follow on X" mark="x" />
+          </div>
         </nav>
         <MobileNav />
       </div>

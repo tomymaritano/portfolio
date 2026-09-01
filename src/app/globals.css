@@ -334,6 +334,28 @@ body[data-menu="closing"] .site-header {
   text-transform: uppercase;
   color: var(--muted);
 }
+.ghost-body > div > * + * {
+  margin-top: 1.25rem;
+}
+.ghost-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+.ghost-body figure {
+  margin: 1.75rem 0;
+}
+.ghost-body figcaption {
+  margin-top: 0.5rem;
+  font-size: 13px;
+  color: var(--muted);
+}
+.ghost-body a {
+  color: var(--mark);
+  font-weight: 600;
+  text-underline-offset: 0.18em;
+}
+
 .prose-work a.heading-anchor {
   margin-left: 0.5rem;
   font-size: 0.85em;

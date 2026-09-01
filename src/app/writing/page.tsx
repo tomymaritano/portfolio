@@ -2,7 +2,8 @@ import { PageFrame } from "@/components/page-frame";
 import { PageTransition } from "@/components/page-transition";
 import { Reveal } from "@/components/reveal";
 import { YearList } from "@/components/year-list";
-import { site, writingIndex } from "@/lib/site";
+import { site } from "@/lib/site";
+import { listWriting } from "@/lib/writing-feed";
 
 export const metadata = {
   title: `Writing — ${site.name}`,
@@ -10,7 +11,8 @@ export const metadata = {
   alternates: { canonical: "/writing" },
 };
 
-export default function WritingIndexPage() {
+export default async function WritingIndexPage() {
+  const notes = await listWriting();
   return (
     <PageTransition>
       <PageFrame className="pt-10 pb-24">
@@ -22,7 +24,7 @@ export default function WritingIndexPage() {
           </a>
           .
         </Reveal>
-        <YearList items={writingIndex()} />
+        <YearList items={notes} />
       </PageFrame>
     </PageTransition>
   );

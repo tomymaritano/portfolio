@@ -1,6 +1,6 @@
 # tomymaritano.com
 
-Personal site. Next.js, Tailwind, MDX in git. No CMS. No admin.
+Personal site. Next.js, Tailwind, MDX in git. Writing can also come from Ghost.
 
 Home is the about. Work is products, roles, and clients. Writing is the technical notes. A case is a file and a folder of stills.
 
@@ -31,6 +31,7 @@ npm run mcp    # stdio MCP for Cursor
 - Cases: `content/work/{slug}.mdx` + `public/work/{slug}/`
 - Notes: `content/writing/{slug}.mdx`
 - Adding a case by hand: MDX + stills + a row in `site.ts`
+- New notes can also publish from Ghost. Local MDX wins on the same slug. Medium is a distribution target, not a CMS.
 
 ## Catalog, drafts, MCP
 
@@ -54,5 +55,8 @@ cp .env.example .env.local
 | `CONTENT_API_TOKEN` | Shared secret for drafts |
 | `GITHUB_TOKEN` | Fine-grained: contents + pull requests, this repo only |
 | `GITHUB_REPO` | `owner/repo` (default `tomymaritano/portfolio`) |
+| `GHOST_URL` | Ghost site URL (`https://….ghost.io` or your Ghost admin URL) |
+| `GHOST_CONTENT_API_KEY` | Content API key from Ghost Admin → Integrations |
+| `GHOST_WEBHOOK_SECRET` | Query secret for `POST /api/ghost/revalidate` |
 
 Spec: `docs/superpowers/specs/2026-08-16-portfolio-design.md`
