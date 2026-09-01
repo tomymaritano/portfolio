@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { PageFrame } from "@/components/page-frame";
 import { PageTransition } from "@/components/page-transition";
+import { Portrait } from "@/components/portrait";
 import { Reveal, StaggerIn } from "@/components/reveal";
 import { site } from "@/lib/site";
 
@@ -10,14 +10,7 @@ export default function HomePage() {
     <PageTransition>
       <PageFrame className="pt-12 pb-24">
         <Reveal as="header">
-          <Image
-            src={site.photo}
-            alt={site.name}
-            width={208}
-            height={208}
-            priority
-            className="mb-4 ml-6 hidden size-40 rounded-full object-cover object-[center_20%] md:float-right md:block"
-          />
+          <Portrait />
           <h1 className="text-[2rem] leading-tight font-semibold tracking-tight text-foreground sm:text-[2.35rem]">
             {site.headline}
           </h1>
