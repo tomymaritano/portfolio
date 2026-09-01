@@ -221,6 +221,9 @@ body[data-menu="closing"] .site-header {
 .text-link {
   position: relative;
   display: inline-block;
+  overflow: visible;
+  padding-bottom: 0.2em;
+  font-weight: 600;
   color: var(--mark);
   text-decoration: none;
   vertical-align: baseline;
@@ -235,9 +238,8 @@ body[data-menu="closing"] .site-header {
   right: 0;
   bottom: 0.12em;
   left: 0;
-  height: 1px;
-  transform: scaleX(0.5);
-  transform-origin: 0 50%;
+  height: 1.5px;
+  transform-origin: 50% 100%;
   background: currentColor;
 }
 .prose-work code {

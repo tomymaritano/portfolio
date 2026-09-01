@@ -19,7 +19,7 @@ export function TextLink({ href, children, className = "", onPointerEnter, onPoi
   const { contextSafe } = useGSAP(
     () => {
       if (!bar.current) return;
-      gsap.set(bar.current, { scaleX: 0.5, transformOrigin: "0% 50%" });
+      gsap.set(bar.current, { scaleX: 1, scaleY: 1, transformOrigin: "50% 100%" });
     },
     { scope: root, dependencies: [reduced] },
   );
@@ -30,13 +30,13 @@ export function TextLink({ href, children, className = "", onPointerEnter, onPoi
     if (!el || !line) return;
     el.classList.toggle("is-on", on);
     if (reduced) {
-      gsap.set(line, { scaleX: on ? 1 : 0.5 });
+      gsap.set(line, { scaleY: on ? 1.6 : 1 });
       return;
     }
     gsap.to(line, {
-      scaleX: on ? 1 : 0.5,
-      duration: 0.34,
-      ease: "power3.out",
+      scaleY: on ? 1.6 : 1,
+      duration: 0.28,
+      ease: "power2.out",
       overwrite: "auto",
     });
   });
