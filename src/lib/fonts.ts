@@ -2,6 +2,8 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 
 export const display = Newsreader({
   subsets: ["latin", "latin-ext"],
+  axes: ["opsz"],
+  style: ["normal", "italic"],
   variable: "--font-newsreader",
   display: "swap",
 });

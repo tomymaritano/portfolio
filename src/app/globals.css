@@ -43,8 +43,9 @@ body {
 h1 {
   font-family: var(--font-display), ui-serif, Georgia, serif;
   font-weight: 500;
-  letter-spacing: -0.03em;
-  font-optical-sizing: auto;
+  letter-spacing: -0.035em;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 72;
 }
 
 .site-atmosphere {
