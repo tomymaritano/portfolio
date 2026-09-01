@@ -27,7 +27,15 @@ function groupByYear(items: readonly Row[]) {
   return groups;
 }
 
-export function YearList({ items, spine = true }: { items: readonly Row[]; spine?: boolean }) {
+export function YearList({
+  items,
+  spine = true,
+  markFirst = false,
+}: {
+  items: readonly Row[];
+  spine?: boolean;
+  markFirst?: boolean;
+}) {
   const root = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
   const groups = groupByYear(items);
@@ -86,6 +94,7 @@ export function YearList({ items, spine = true }: { items: readonly Row[]; spine
 
   const hair = contextSafe((row: HTMLElement, on: boolean) => {
     if (reduced) return;
+    if (row.hasAttribute("data-year-latest")) return;
     const mark = row.querySelector<HTMLElement>("[data-year-hair]");
     if (!mark) return;
     gsap.to(mark, {
@@ -118,8 +127,12 @@ export function YearList({ items, spine = true }: { items: readonly Row[]; spine
   return (
     <div ref={root} className="relative">
       <p className="sr-only">On a keyboard, j and k move between rows once one is focused.</p>
-      {spine ? <span data-archive-spine="" className="archive-spine" aria-hidden /> : null}
-      {groups.map((group) => (
+      {spine ? (
+        <span className="archive-spine-clip" aria-hidden>
+          <span data-archive-spine="" className="archive-spine" />
+        </span>
+      ) : null}
+      {groups.map((group, groupIndex) => (
         <div key={group.year} data-archive-group="" className="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-x-6">
           <div>
             <p data-archive-year="" className="archive-year sticky top-20 pt-4 text-[15px] tabular-nums">
@@ -127,30 +140,38 @@ export function YearList({ items, spine = true }: { items: readonly Row[]; spine
             </p>
           </div>
           <StaggerIn as="ol" stagger={0.045} y={8}>
-            {group.items.map((item) => (
-              <li key={`${item.kind}-${item.slug}`}>
-                <Link
-                  href={item.path}
-                  transitionTypes={["nav-forward"]}
-                  onPointerEnter={(event) => hair(event.currentTarget, true)}
-                  onPointerLeave={(event) => hair(event.currentTarget, false)}
-                  onFocus={(event) => hair(event.currentTarget, true)}
-                  onBlur={(event) => hair(event.currentTarget, false)}
-                  aria-keyshortcuts="j k"
-                  className="year-row group relative flex min-h-11 cursor-pointer flex-col py-4"
-                >
-                  <span data-year-hair="" className="year-hair" aria-hidden />
-                  <ViewTransition name={`${item.kind}-${item.slug}`} share="morph" default="none">
-                    <span className="text-pretty text-[16px] leading-snug text-foreground transition-colors duration-200 group-hover:text-accent">
-                      {item.title}
+            {group.items.map((item, itemIndex) => {
+              const latest = markFirst && groupIndex === 0 && itemIndex === 0;
+              return (
+                <li key={`${item.kind}-${item.slug}`} className="relative overflow-hidden">
+                  <Link
+                    href={item.path}
+                    transitionTypes={["nav-forward"]}
+                    onPointerEnter={(event) => hair(event.currentTarget, true)}
+                    onPointerLeave={(event) => hair(event.currentTarget, false)}
+                    onFocus={(event) => hair(event.currentTarget, true)}
+                    onBlur={(event) => hair(event.currentTarget, false)}
+                    aria-keyshortcuts="j k"
+                    data-year-latest={latest ? "" : undefined}
+                    className="year-row group relative flex min-h-11 cursor-pointer flex-col overflow-hidden py-4"
+                  >
+                    <span data-year-hair="" className="year-hair" aria-hidden />
+                    <ViewTransition name={`${item.kind}-${item.slug}`} share="morph" default="none">
+                      <span
+                        className={`text-pretty text-[16px] leading-snug transition-colors duration-200 group-hover:text-accent ${
+                          latest ? "text-accent" : "text-foreground"
+                        }`}
+                      >
+                        {item.title}
+                      </span>
+                    </ViewTransition>
+                    <span className="mt-1.5 max-w-[34rem] text-[14px] leading-6 text-muted transition-colors duration-200 group-hover:text-foreground/65">
+                      {item.line}
                     </span>
-                  </ViewTransition>
-                  <span className="mt-1.5 max-w-[34rem] text-[14px] leading-6 text-muted transition-colors duration-200 group-hover:text-foreground/65">
-                    {item.line}
-                  </span>
-                </Link>
-              </li>
-            ))}
+                  </Link>
+                </li>
+              );
+            })}
           </StaggerIn>
         </div>
       ))}
