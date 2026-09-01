@@ -14,10 +14,10 @@ const experience: CvItem[] = [
   {
     slug: "psynth",
     org: "Psynth",
-    role: "Senior Full Stack Engineer",
+    role: "Lead Engineer",
     period: "2026 — Present",
     summary:
-      "Sole lead engineer / senior full-stack for a clinical reporting product. Test results and intake become a structured draft for psychologist review and signature.",
+      "Lead Engineer for a clinical reporting product. I joined as a design engineer. Test results and intake become a structured draft for psychologist review and signature.",
     href: "https://psynth.ai",
   },
   {
@@ -133,13 +133,13 @@ export function cvData() {
 
   return {
     name: listed.name,
-    title: "Senior Full Stack Engineer",
+    title: "Lead Engineer",
     city: listed.city,
     email: listed.email,
     linkedin: listed.linkedin,
     github: listed.github,
     summary:
-      "Software engineer and engineering lead. I build product systems across frontend, backend, and AI-assisted document generation. Currently Senior Full Stack Engineer at Psynth (sole lead on engineering). Based in Buenos Aires. Studied at Universidad Tecnológica Nacional.",
+      "Software engineer and engineering lead. I build product systems across frontend, backend, and AI-assisted document generation. Currently Lead Engineer at Psynth. I joined as a design engineer. Based in Buenos Aires. Studied at Universidad Tecnológica Nacional.",
     experience: experience.map((item) => ({
       ...item,
       href: item.slug === "earlier" ? null : hrefFor(item.slug) ?? item.href ?? null,

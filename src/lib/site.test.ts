@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  homeMeta,
   homeSlugs,
   homeWork,
   isHomeSlug,
@@ -28,6 +29,10 @@ describe("site", () => {
     expect(site.about[0]).not.toMatch(/^I started building/i);
     expect(site.about[0]).not.toMatch(/^I was twelve/i);
     expect(site.about[0]).toMatch(/document|generat|Psynth/i);
+    expect(site.about[0]).toMatch(/I'm Lead Engineer at Psynth/);
+    expect(site.about[0]).toMatch(/I joined as a design engineer/);
+    expect(site.about[0]).not.toMatch(/senior full-stack|sole lead/i);
+    expect(site.contributions.find((item) => item.title === "Psynth")?.lead).toBe("Lead Engineer at ");
     expect(site.line).toMatch(/extract/i);
     expect(site.about.join(" ")).toMatch(/twelve|12/i);
     expect(site.about.join(" ")).toMatch(/CMS/i);
@@ -64,6 +69,7 @@ describe("site", () => {
     expect(site.contributions[0]?.title).toBe("Dripnex");
     expect(site.contributions[0]?.tail).toMatch(/hackable AI note taker/i);
     expect(workBySlug("psynth")?.title).toBe("Psynth");
+    expect(workBySlug("psynth")?.line).toBe("Clinical reporting. Lead Engineer.");
     expect(workBySlug("readied")?.href).toBe("https://readied.app");
     expect(workBySlug("cairn")?.repo?.includes("github.com")).toBe(true);
     expect(workBySlug("minipix")?.title).toBe("Minipix");
@@ -86,6 +92,9 @@ describe("site", () => {
     expect(writingBySlug("the-file-has-to-stay-readable")?.date).toBe("2026-03-02");
     expect(writingBySlug("grok-bot-and-cursor")?.title).toBe("Grok 4.6 in Cursor is not Grok Bot");
     expect(writingBySlug("corne-keyboard")?.title).toBe("A Corne is a 42-key contract");
+    expect(writingBySlug("lead-is-not-a-status-parade")?.title).toBe("Lead is not a status parade");
+    expect(writingBySlug("lead-is-not-a-status-parade")?.date).toBe("2026-08-31");
+    expect(writingBySlug("lead-is-not-a-status-parade")?.line).toMatch(/Standup closes the day/i);
     expect(writingBySlug("lily58-is-not-a-bigger-corne")?.title).toBe("A Lily58 is not a bigger Corne");
     expect(writingBySlug("lily58-is-not-a-bigger-corne")?.date).toBe("2026-08-28");
     expect(writingBySlug("lily58-is-not-a-bigger-corne")?.line).toMatch(/Linear whites/i);
@@ -177,7 +186,7 @@ describe("site", () => {
     expect(projects.map((item) => item.slug)).not.toContain("claude-code-pm");
     expect(homeWork().map((item) => item.slug)).toEqual(["psynth", "dripnex", "dolargaucho", "quantis-intel"]);
     expect(workBySlug("quantis-intel")?.line).toBe("The financial report a desk will send.");
-    expect(notes[0]?.slug).toBe("lily58-is-not-a-bigger-corne");
+    expect(notes[0]?.slug).toBe("lead-is-not-a-status-parade");
     expect(notes.map((item) => item.slug)).toContain("a-scaffold-is-not-a-decision");
     expect(notes.map((item) => item.slug)).toContain("a-run-is-not-a-click");
     expect(notes.map((item) => item.slug)).toContain("a-span-is-not-a-reason");
@@ -254,6 +263,7 @@ describe("site", () => {
         "a-run-is-not-a-click",
         "a-scaffold-is-not-a-decision",
         "lily58-is-not-a-bigger-corne",
+        "lead-is-not-a-status-parade",
       ]),
     );
     expect(workLanes.dripnex).toBe("product");
@@ -264,6 +274,7 @@ describe("site", () => {
 
   it("keeps the four spine products on /work selected, not in archive", () => {
     expect([...homeSlugs]).toEqual(["psynth", "dripnex", "dolargaucho", "quantis-intel"]);
+    expect(homeMeta.psynth.role).toBe("Lead Engineer");
     expect(homeWork().map((item) => item.slug)).toEqual([...homeSlugs]);
     expect(isHomeSlug("dripnex")).toBe(true);
     expect(isHomeSlug("readied")).toBe(false);
@@ -292,6 +303,7 @@ describe("site", () => {
     expect(workNotes.devwifi).toBe("the-radio-is-fine");
     expect(workNotes.dolargaucho).toBe("the-quote-is-not-the-product");
     expect(workNotes.readied).toBe("the-file-has-to-stay-readable");
+    expect(workForNote("lead-is-not-a-status-parade")?.slug).toBe("psynth");
     expect(workForNote("the-file-has-to-stay-readable")?.slug).toBe("readied");
     expect(workForNote("the-quote-is-not-the-product")?.slug).toBe("dolargaucho");
     expect(workForNote("the-radio-is-fine")?.slug).toBe("devwifi");
@@ -309,7 +321,9 @@ describe("site", () => {
   });
 
   it("walks writing and work in date order", () => {
-    expect(writingNeighbors("lily58-is-not-a-bigger-corne").newer).toBeNull();
+    expect(writingNeighbors("lead-is-not-a-status-parade").newer).toBeNull();
+    expect(writingNeighbors("lead-is-not-a-status-parade").older?.slug).toBe("lily58-is-not-a-bigger-corne");
+    expect(writingNeighbors("lily58-is-not-a-bigger-corne").newer?.slug).toBe("lead-is-not-a-status-parade");
     expect(writingNeighbors("lily58-is-not-a-bigger-corne").older?.slug).toBe("a-scaffold-is-not-a-decision");
     expect(writingNeighbors("a-scaffold-is-not-a-decision").newer?.slug).toBe("lily58-is-not-a-bigger-corne");
     expect(writingNeighbors("a-scaffold-is-not-a-decision").older?.slug).toBe("a-run-is-not-a-click");

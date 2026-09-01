@@ -56,6 +56,7 @@ describe("catalog", () => {
         "a-run-is-not-a-click",
         "lily58-is-not-a-bigger-corne",
         "a-scaffold-is-not-a-decision",
+        "lead-is-not-a-status-parade",
       ]),
     );
     const quantis = catalog.work.find((item) => item.slug === "quantis-intel");
@@ -320,6 +321,17 @@ describe("catalog", () => {
     expect(lily?.body).toMatch(/qmk compile/);
     expect(lily?.body).toMatch(/\/writing\/lily58\/mcu\.jpg/);
     expect(lily?.body).not.toMatch(/PHI/i);
+    const lead = await getEntry("writing", "lead-is-not-a-status-parade");
+    expect(lead?.title).toBe("Lead is not a status parade");
+    expect(lead?.body).toMatch(/Lead Engineer at/);
+    expect(lead?.body).toMatch(/design engineer/);
+    expect(lead?.body).toMatch(/What I would not do again/);
+    expect(lead?.body).toMatch(/The bar/);
+    expect(lead?.body).toMatch(/No patient content on this page/);
+    const psynth = await getEntry("work", "psynth");
+    expect(psynth?.line).toBe("Clinical reporting. Lead Engineer.");
+    expect(psynth?.body).toMatch(/I'm now Lead Engineer/);
+    expect(psynth?.body).not.toMatch(/senior full-stack|sole lead/i);
     const scaffold = await getEntry("writing", "a-scaffold-is-not-a-decision");
     expect(scaffold?.title).toBe("A scaffold is not a decision");
     expect(scaffold?.body).toMatch(/criterion new/);
@@ -388,7 +400,7 @@ describe("cv data", () => {
     const data = cvData();
     const blob = JSON.stringify(data);
     expect(data.name).toBe("Tomás Maritano");
-    expect(data.title).toBe("Senior Full Stack Engineer");
+    expect(data.title).toBe("Lead Engineer");
     expect(data.summary).toMatch(/Psynth/);
     expect(data.education.school).toMatch(/Tecnológica Nacional/);
     expect(data.products.find((item) => item.slug === "quantis-intel")?.href).toBeNull();
