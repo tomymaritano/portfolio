@@ -491,12 +491,18 @@ body[data-menu="closing"] .site-header {
   outline-offset: 3px;
 }
 
+.year-list {
+  --year-col: 3.25rem;
+  --year-gap: 1.5rem;
+  --rail: calc(var(--year-col) + var(--year-gap) / 2);
+}
+
 .archive-spine {
   pointer-events: none;
   position: absolute;
   top: 0.85rem;
   bottom: 0.85rem;
-  left: 3.75rem;
+  left: var(--rail);
   width: 1px;
   background: color-mix(in srgb, var(--accent) 32%, transparent);
   transform: scaleY(0);
@@ -508,7 +514,7 @@ body[data-menu="closing"] .site-header {
   position: absolute;
   top: 0.7rem;
   bottom: 0.7rem;
-  left: -0.75rem;
+  left: calc(var(--rail) - var(--year-col) - var(--year-gap));
   width: 1px;
   background: var(--accent);
   transform: scaleY(0);

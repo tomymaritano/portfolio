@@ -116,11 +116,15 @@ export function YearList({ items, spine = true }: { items: readonly Row[]; spine
   }, [items.length]);
 
   return (
-    <div ref={root} className="relative">
+    <div ref={root} className="year-list relative">
       <p className="sr-only">On a keyboard, j and k move between rows once one is focused.</p>
       {spine ? <span data-archive-spine="" className="archive-spine" aria-hidden /> : null}
       {groups.map((group) => (
-        <div key={group.year} data-archive-group="" className="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-x-6">
+        <div
+          key={group.year}
+          data-archive-group=""
+          className="grid grid-cols-[var(--year-col)_minmax(0,1fr)] gap-x-[var(--year-gap)]"
+        >
           <div>
             <p data-archive-year="" className="archive-year sticky top-20 pt-4 text-[15px] tabular-nums">
               {group.year}
