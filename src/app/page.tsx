@@ -14,7 +14,7 @@ export default function HomePage() {
         <Reveal as="header" className="relative">
           <Portrait />
           <h1 className="text-[2rem] leading-tight font-semibold tracking-tight text-foreground sm:text-[2.35rem]">
-            I <span className="text-spot">ship</span> products.
+            I <span className="text-accent">ship</span> products.
           </h1>
           <p className="mt-4 max-w-[40rem] text-[16px] leading-7 text-foreground/70">{site.line}</p>
           <p className="mt-4 text-[13px] text-muted">
