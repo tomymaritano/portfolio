@@ -3,6 +3,7 @@ import { PageFrame } from "@/components/page-frame";
 import { PageTransition } from "@/components/page-transition";
 import { Portrait } from "@/components/portrait";
 import { Reveal, StaggerIn } from "@/components/reveal";
+import { TextLink } from "@/components/text-link";
 import { site } from "@/lib/site";
 
 export default function HomePage() {
@@ -36,22 +37,14 @@ export default function HomePage() {
         <Reveal as="section" delay={0.16} className="mt-16">
           <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Work</h2>
           <p className="mt-5 text-[16px] leading-7 text-foreground/85">
-            <Link href="/work/psynth" transitionTypes={["nav-forward"]} className="text-link">
-              Psynth
-            </Link>{" "}
-            is clinical reporting: test results and intake become a draft the psychologist reviews and
-            signs.{" "}
-            <Link href="/work/dripnex" transitionTypes={["nav-forward"]} className="text-link">
-              Dripnex
-            </Link>{" "}
-            is a hackable AI note taker — SQLite now, sync when those surfaces ship.{" "}
-            <Link href="/work/dolargaucho" transitionTypes={["nav-forward"]} className="text-link">
-              DolarGaucho
-            </Link>{" "}
-            is quotes and a model that reads the Argentine week.{" "}
-            <Link href="/work/quantis-intel" transitionTypes={["nav-forward"]} className="text-link">
-              Quantis-intel
-            </Link>{" "}
+            <TextLink href="/work/psynth">Psynth</TextLink> is clinical reporting: test results and intake
+            become a draft the psychologist reviews and signs.{" "}
+            <TextLink href="/work/dripnex">Dripnex</TextLink> is a hackable AI note taker — SQLite now, sync
+            when those surfaces ship.{" "}
+            <TextLink href="/work/dolargaucho">DolarGaucho</TextLink> is quotes and a model that reads the
+            Argentine week.{" "}
+            <TextLink href="/work/quantis-intel">Quantis-intel</TextLink> is the financial report a desk will
+            send.
             is the financial report a desk will send.
           </p>
           <p className="mt-6 text-[13px] text-muted">

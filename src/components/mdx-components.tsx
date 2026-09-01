@@ -1,7 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
-import Link from "next/link";
 import { CodeBlock, HeadingAnchor } from "@/components/copy-control";
 import { Mermaid } from "@/components/mermaid";
+import { TextLink } from "@/components/text-link";
 import { fenceLanguage } from "@/lib/copy";
 
 function mermaidSource(node: ReactNode): string | null {
@@ -60,22 +60,15 @@ export const mdxComponents = {
     if (!href) return <a {...props}>{children}</a>;
     if (/^https?:\/\//i.test(href)) {
       return (
-        <a {...props} href={href} target="_blank" rel="noreferrer">
+        <TextLink {...props} href={href} target="_blank" rel="noreferrer">
           {children}
-        </a>
-      );
-    }
-    if (href.startsWith("/")) {
-      return (
-        <Link {...props} href={href} transitionTypes={["nav-forward"]}>
-          {children}
-        </Link>
+        </TextLink>
       );
     }
     return (
-      <a href={href} {...props}>
+      <TextLink href={href} {...props}>
         {children}
-      </a>
+      </TextLink>
     );
   },
   img: ({ alt, ...props }: ComponentProps<"img">) => (
