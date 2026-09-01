@@ -1,3 +1,5 @@
+import { createHmac } from "node:crypto";
+
 export type GhostPost = {
   slug: string;
   title: string;
@@ -16,6 +18,7 @@ type GhostApiPost = {
   excerpt?: string | null;
   published_at?: string | null;
   reading_time?: number | null;
+  status?: string | null;
 };
 
 type GhostList = {
@@ -23,15 +26,32 @@ type GhostList = {
   meta?: { pagination?: { next?: number | null } };
 };
 
-function ghostConfig() {
+type GhostConfig =
+  | { url: string; mode: "content"; key: string }
+  | { url: string; mode: "admin"; id: string; secret: string };
+
+function ghostConfig(): GhostConfig | null {
   const url = process.env.GHOST_URL?.replace(/\/$/, "");
-  const key = process.env.GHOST_CONTENT_API_KEY;
-  if (!url || !key) return null;
-  return { url, key };
+  if (!url) return null;
+  const content = process.env.GHOST_CONTENT_API_KEY;
+  if (content) return { url, mode: "content", key: content };
+  const admin = process.env.GHOST_ADMIN_API_KEY;
+  if (!admin?.includes(":")) return null;
+  const [id, secret] = admin.split(":");
+  if (!id || !secret) return null;
+  return { url, mode: "admin", id, secret };
 }
 
 export function ghostConfigured() {
   return ghostConfig() !== null;
+}
+
+function adminToken(id: string, secret: string) {
+  const header = Buffer.from(JSON.stringify({ alg: "HS256", kid: id, typ: "JWT" })).toString("base64url");
+  const now = Math.floor(Date.now() / 1000);
+  const payload = Buffer.from(JSON.stringify({ iat: now, exp: now + 300, aud: "/admin/" })).toString("base64url");
+  const sig = createHmac("sha256", Buffer.from(secret, "hex")).update(`${header}.${payload}`).digest("base64url");
+  return `${header}.${payload}.${sig}`;
 }
 
 function stripHtml(value: string) {
@@ -43,6 +63,7 @@ function toDate(iso: string) {
 }
 
 function mapPost(post: GhostApiPost): GhostPost | null {
+  if (post.status && post.status !== "published") return null;
   if (!post.slug || !post.title || !post.published_at) return null;
   const html = post.html ?? "";
   const excerpt = post.custom_excerpt?.trim() || stripHtml(post.excerpt ?? html).slice(0, 160);
@@ -60,9 +81,17 @@ function mapPost(post: GhostApiPost): GhostPost | null {
 async function ghostFetch(path: string) {
   const cfg = ghostConfig();
   if (!cfg) return null;
-  const joiner = path.includes("?") ? "&" : "?";
-  const res = await fetch(`${cfg.url}/ghost/api/content${path}${joiner}key=${cfg.key}`, {
-    headers: { "Accept-Version": "v6.0" },
+  const headers: Record<string, string> = { "Accept-Version": "v6.0" };
+  let endpoint: string;
+  if (cfg.mode === "content") {
+    const joiner = path.includes("?") ? "&" : "?";
+    endpoint = `${cfg.url}/ghost/api/content${path}${joiner}key=${cfg.key}`;
+  } else {
+    endpoint = `${cfg.url}/ghost/api/admin${path}`;
+    headers.Authorization = `Ghost ${adminToken(cfg.id, cfg.secret)}`;
+  }
+  const res = await fetch(endpoint, {
+    headers,
     next: { revalidate: 120, tags: ["writing"] },
   });
   if (!res.ok) return null;
@@ -75,7 +104,8 @@ export async function listGhostPosts() {
   try {
     let page = 1;
     while (page) {
-      const data = await ghostFetch(`/posts/?limit=100&page=${page}&formats=html`);
+      const filter = ghostConfig()?.mode === "admin" ? "&filter=status:published" : "";
+      const data = await ghostFetch(`/posts/?limit=100&page=${page}&formats=html${filter}`);
       if (!data?.posts?.length) break;
       for (const row of data.posts) {
         const mapped = mapPost(row);
