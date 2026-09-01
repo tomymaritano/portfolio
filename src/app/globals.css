@@ -10,6 +10,7 @@
   --accent-dim: rgba(110, 237, 198, 0.14);
   --glow: rgba(110, 237, 198, 0.28);
   --mark: color-mix(in srgb, var(--accent) 58%, var(--muted));
+  --spot: #e8c4a0;
 }
 
 @theme inline {
@@ -20,6 +21,7 @@
   --color-card: var(--card);
   --color-accent: var(--accent);
   --color-mark: var(--mark);
+  --color-spot: var(--spot);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
