@@ -204,21 +204,25 @@ export default function MagicRings({
 
     const onMouseMove = (e: MouseEvent) => {
       const rect = mount.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
       mouseRef.current[0] = (e.clientX - rect.left) / rect.width - 0.5;
       mouseRef.current[1] = -((e.clientY - rect.top) / rect.height - 0.5);
+      isHoveredRef.current =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
     };
-    const onMouseEnter = () => { isHoveredRef.current = true; };
-    const onMouseLeave = () => {
+    const onMouseLeaveWindow = () => {
       isHoveredRef.current = false;
       mouseRef.current[0] = 0;
       mouseRef.current[1] = 0;
     };
     const onClick = () => { burstRef.current = 1; };
 
-    mount.addEventListener('mousemove', onMouseMove);
-    mount.addEventListener('mouseenter', onMouseEnter);
-    mount.addEventListener('mouseleave', onMouseLeave);
-    mount.addEventListener('click', onClick);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeaveWindow);
+    if (clickBurst) mount.addEventListener('click', onClick);
 
     let frameId = 0;
     let isVisible = false;
@@ -302,9 +306,8 @@ export default function MagicRings({
       document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('resize', resize);
       ro.disconnect();
-      mount.removeEventListener('mousemove', onMouseMove);
-      mount.removeEventListener('mouseenter', onMouseEnter);
-      mount.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeaveWindow);
       mount.removeEventListener('click', onClick);
       mount.removeChild(renderer.domElement);
       renderer.dispose();

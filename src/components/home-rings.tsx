@@ -9,19 +9,23 @@ export function HomeRings() {
 
   return (
     <div
-      className="pointer-events-none absolute -top-28 left-1/2 z-0 hidden h-96 w-[40rem] -translate-x-1/2 opacity-60 md:block"
+      className="pointer-events-none absolute inset-x-0 z-0 h-dvh w-full"
+      style={{ top: "calc(-4rem - env(safe-area-inset-top, 0px))" }}
       aria-hidden
     >
       <MagicRings
-        color="#6eedc6"
-        colorTwo="#245c4c"
-        opacity={0.65}
-        ringCount={5}
-        lineThickness={1.35}
-        noiseAmount={0.03}
+        color="#7ec8ff"
+        colorTwo="#1a3d5c"
+        opacity={0.95}
+        ringCount={7}
+        lineThickness={1.85}
+        baseRadius={0.2}
+        radiusStep={0.12}
+        scaleRate={0.34}
+        noiseAmount={0.02}
         followMouse
-        mouseInfluence={0.16}
-        hoverScale={1.08}
+        mouseInfluence={0.14}
+        hoverScale={1.06}
         clickBurst={false}
       />
     </div>
