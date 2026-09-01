@@ -15,9 +15,10 @@ export default function ColophonPage() {
       <PageFrame className="pt-10 pb-24">
         <Reveal>
           <p className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Colophon</p>
-          <h1 className="mt-2 text-[2rem] leading-tight font-semibold tracking-tight">How this is made.</h1>
+          <h1 className="mt-2 text-[2rem] leading-tight font-medium tracking-tight">How this is made.</h1>
           <p className="prose-work mt-6 text-[16px] leading-7 text-foreground/85">
-            A case is a file and a folder of stills. Next.js, Tailwind, MDX in git. Notes can also
+            A case is a file and a folder of stills. Next.js, Tailwind, MDX in git. Headlines are
+            Newsreader, body is IBM Plex Sans, labels are IBM Plex Mono. Notes can also
             publish from Ghost and land on <code>/writing</code>. Drafts still arrive as pull requests from{" "}
             <code>/api/content</code>. The CV at{" "}
             <code>/cv.pdf</code> is generated from the same catalog. Hosted on Vercel. Navigation

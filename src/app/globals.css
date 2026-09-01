@@ -21,8 +21,9 @@
   --color-card: var(--card);
   --color-accent: var(--accent);
   --color-mark: var(--mark);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-plex-sans);
+  --font-display: var(--font-newsreader);
+  --font-mono: var(--font-plex-mono);
 }
 
 html {
@@ -37,6 +38,13 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+}
+
+h1 {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  font-optical-sizing: auto;
 }
 
 .site-atmosphere {
@@ -225,12 +233,12 @@ body[data-menu="closing"] .site-header {
   position: relative;
   display: inline-block;
   overflow: visible;
-  padding-bottom: 0.2em;
-  font-weight: 600;
+  padding-bottom: 0.12em;
+  font-weight: 500;
   color: var(--mark);
   text-decoration: none;
   vertical-align: baseline;
-  transition: color 220ms ease;
+  transition: color 240ms ease;
 }
 .text-link.is-on {
   color: var(--mark-hot);
@@ -239,10 +247,11 @@ body[data-menu="closing"] .site-header {
   pointer-events: none;
   position: absolute;
   right: 0;
-  bottom: 0.12em;
+  bottom: 0.04em;
   left: 0;
-  height: 1.5px;
-  transform-origin: 50% 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: 0% 100%;
   background: currentColor;
 }
 .prose-work code {

@@ -15,7 +15,7 @@ export default function NotFound() {
       <PageFrame className="pt-16 pb-24">
         <Reveal>
           <p className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">404</p>
-          <h1 className="mt-2 text-[2rem] leading-tight font-semibold tracking-tight">This page is not here.</h1>
+          <h1 className="mt-2 text-[2rem] leading-tight font-medium tracking-tight">This page is not here.</h1>
           <p className="mt-4 max-w-[40rem] text-[16px] leading-7 text-foreground/70">
             The URL does not match a case or a note. Work and writing live in git; if the file is gone, so is the route.
           </p>

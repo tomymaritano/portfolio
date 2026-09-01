@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { shell } from "@/components/page-frame";
 import { SiteNav } from "@/components/site-nav";
+import { fontVariables } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import "./globals.css";
-
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -51,7 +48,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
+    <html lang="en" className={fontVariables}>
       <body className="min-h-dvh bg-background text-foreground">
         <script
           type="application/ld+json"

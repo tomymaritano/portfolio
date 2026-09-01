@@ -16,7 +16,7 @@ export default function Error({
       <PageFrame className="pt-16 pb-24">
         <Reveal>
           <p className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Error</p>
-          <h1 className="mt-2 text-[2rem] leading-tight font-semibold tracking-tight">This page did not render.</h1>
+          <h1 className="mt-2 text-[2rem] leading-tight font-medium tracking-tight">This page did not render.</h1>
           <p className="mt-4 max-w-[40rem] text-[16px] leading-7 text-foreground/70">
             A route threw. The files are still in git. Retry the render, or go somewhere that is already built.
           </p>

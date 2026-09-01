@@ -43,7 +43,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       <PageFrame className="pt-10 pb-24">
         <Reveal as="header">
           <ViewTransition name={`work-${item.slug}`} share="morph" default="none">
-            <h1 className="text-pretty text-[2rem] leading-tight font-semibold tracking-tight">{frontmatter.title}</h1>
+            <h1 className="text-pretty text-[2rem] leading-tight font-medium tracking-tight">{frontmatter.title}</h1>
           </ViewTransition>
           <p className="mt-3 flex flex-col gap-y-1 text-[13px] text-muted sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4">
             <span>
