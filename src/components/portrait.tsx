@@ -38,11 +38,11 @@ export function Portrait() {
         opacity: 1,
       });
       gsap.set(frame, { transformPerspective: 720, transformOrigin: "50% 50%" });
-      gsap.set(shot, { scale: 1.18, x: 0, y: 0 });
+      gsap.set(shot, { scale: 1, x: 0, y: 0, transformOrigin: "50% 22%" });
       gsap.set(light, { x: 0, y: 0, opacity: 0, scale: 0.4 });
 
       if (reduced) {
-        gsap.set(shot, { scale: 1.08 });
+        gsap.set(shot, { scale: 1 });
         gsap.set(arc, { strokeDasharray: CIRC, strokeDashoffset: 0 });
         return;
       }
@@ -55,8 +55,8 @@ export function Portrait() {
       const lightY = gsap.quickTo(light, "y", { duration: 0.4, ease: "power3.out" });
 
       const enter = gsap.timeline({ defaults: { ease: "power3.out" } });
-      enter.from(frame, { scale: 0.72, rotationY: 28, z: -80, duration: 1.05 }, 0);
-      enter.fromTo(shot, { scale: 1.45, y: 16 }, { scale: 1.18, y: 0, duration: 1.2 }, 0.05);
+      enter.from(frame, { scale: 0.92, rotationY: 18, z: -40, duration: 1.05 }, 0);
+      enter.fromTo(shot, { scale: 1.06 }, { scale: 1, duration: 1.15 }, 0.05);
       enter.fromTo(
         arc,
         { strokeDasharray: `0 ${CIRC}`, strokeDashoffset: CIRC * 0.25 },
@@ -78,12 +78,12 @@ export function Portrait() {
         const box = stage.getBoundingClientRect();
         const nx = (event.clientX - box.left) / box.width - 0.5;
         const ny = (event.clientY - box.top) / box.height - 0.5;
-        rotY(nx * 16);
-        rotX(ny * -12);
-        imgX(nx * -14);
-        imgY(ny * -10);
-        lightX(nx * 36);
-        lightY(ny * 36);
+        rotY(nx * 10);
+        rotX(ny * -8);
+        imgX(nx * -5);
+        imgY(ny * -4);
+        lightX(nx * 28);
+        lightY(ny * 28);
         gsap.to(arc, {
           strokeDashoffset: -((Math.atan2(ny, nx) * CIRC) / (Math.PI * 2)),
           duration: 0.45,
@@ -96,7 +96,7 @@ export function Portrait() {
         spin.pause();
         gsap.to(arc, { stroke: "var(--accent)", strokeDasharray: `${ARC * 1.35} ${CIRC}`, duration: 0.35, ease: "power2.out" });
         gsap.to(light, { opacity: 0.9, scale: 1, duration: 0.4, ease: "power2.out" });
-        gsap.to(shot, { scale: 1.22, duration: 0.5, ease: "power2.out" });
+        gsap.to(shot, { scale: 1.03, duration: 0.5, ease: "power2.out" });
       });
 
       const rest = contextSafe?.(() => {
@@ -114,7 +114,7 @@ export function Portrait() {
           ease: "power3.out",
         });
         gsap.to(light, { opacity: 0, scale: 0.4, duration: 0.4, ease: "power2.out" });
-        gsap.to(shot, { scale: 1.18, duration: 0.55, ease: "power3.out" });
+        gsap.to(shot, { scale: 1, duration: 0.55, ease: "power3.out" });
         gsap.to(mark, { rotation: -90, duration: 0.6, ease: "power2.out", onComplete: () => spin.play() });
       });
 
