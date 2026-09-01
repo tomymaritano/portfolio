@@ -579,9 +579,6 @@ body[data-menu="closing"] .site-header {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-portrait-ring] {
-    stroke-dashoffset: 0;
-  }
   .reveal,
   .reveal-view {
     animation: none;
