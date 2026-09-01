@@ -36,20 +36,20 @@ export default function HomePage() {
         <Reveal as="section" delay={0.16} className="mt-16">
           <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Work</h2>
           <p className="mt-5 text-[16px] leading-7 text-foreground/85">
-            <Link href="/work/psynth" transitionTypes={["nav-forward"]} className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
+            <Link href="/work/psynth" transitionTypes={["nav-forward"]} className="text-link">
               Psynth
             </Link>{" "}
             is clinical reporting: test results and intake become a draft the psychologist reviews and
             signs.{" "}
-            <Link href="/work/dripnex" transitionTypes={["nav-forward"]} className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
+            <Link href="/work/dripnex" transitionTypes={["nav-forward"]} className="text-link">
               Dripnex
             </Link>{" "}
             is a hackable AI note taker — SQLite now, sync when those surfaces ship.{" "}
-            <Link href="/work/dolargaucho" transitionTypes={["nav-forward"]} className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
+            <Link href="/work/dolargaucho" transitionTypes={["nav-forward"]} className="text-link">
               DolarGaucho
             </Link>{" "}
             is quotes and a model that reads the Argentine week.{" "}
-            <Link href="/work/quantis-intel" transitionTypes={["nav-forward"]} className="text-foreground underline underline-offset-4 transition-colors duration-200 hover:text-accent">
+            <Link href="/work/quantis-intel" transitionTypes={["nav-forward"]} className="text-link">
               Quantis-intel
             </Link>{" "}
             is the financial report a desk will send.
