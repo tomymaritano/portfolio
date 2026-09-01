@@ -220,20 +220,25 @@ body[data-menu="closing"] .site-header {
 
 .text-link {
   position: relative;
-  display: inline;
+  display: inline-block;
   color: var(--mark);
   text-decoration: none;
+  vertical-align: baseline;
+  transition: color 220ms ease;
+}
+.text-link.is-on {
+  color: var(--accent);
 }
 .text-link-bar {
   pointer-events: none;
   position: absolute;
   right: 0;
-  bottom: 0.08em;
+  bottom: 0.12em;
   left: 0;
   height: 1px;
-  transform: scaleX(0.46);
+  transform: scaleX(0.5);
   transform-origin: 0 50%;
-  background: var(--mark);
+  background: currentColor;
 }
 .prose-work code {
   border-radius: 0.25rem;

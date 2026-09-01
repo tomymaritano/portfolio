@@ -18,15 +18,8 @@ export function TextLink({ href, children, className = "", onPointerEnter, onPoi
 
   const { contextSafe } = useGSAP(
     () => {
-      const el = root.current;
-      const line = bar.current;
-      if (!el || !line) return;
-      gsap.set(el, { color: "var(--mark)" });
-      gsap.set(line, {
-        scaleX: 0.46,
-        transformOrigin: "0% 50%",
-        backgroundColor: "var(--mark)",
-      });
+      if (!bar.current) return;
+      gsap.set(bar.current, { scaleX: 0.5, transformOrigin: "0% 50%" });
     },
     { scope: root, dependencies: [reduced] },
   );
@@ -35,21 +28,14 @@ export function TextLink({ href, children, className = "", onPointerEnter, onPoi
     const el = root.current;
     const line = bar.current;
     if (!el || !line) return;
+    el.classList.toggle("is-on", on);
     if (reduced) {
-      gsap.set(el, { color: on ? "var(--accent)" : "var(--mark)" });
-      gsap.set(line, { scaleX: 1, backgroundColor: on ? "var(--accent)" : "var(--mark)" });
+      gsap.set(line, { scaleX: on ? 1 : 0.5 });
       return;
     }
-    gsap.to(el, {
-      color: on ? "var(--accent)" : "var(--mark)",
-      duration: 0.28,
-      ease: "power2.out",
-      overwrite: "auto",
-    });
     gsap.to(line, {
-      scaleX: on ? 1 : 0.46,
-      backgroundColor: on ? "var(--accent)" : "var(--mark)",
-      duration: 0.38,
+      scaleX: on ? 1 : 0.5,
+      duration: 0.34,
       ease: "power3.out",
       overwrite: "auto",
     });
@@ -78,26 +64,14 @@ export function TextLink({ href, children, className = "", onPointerEnter, onPoi
 
   if (href.startsWith("/")) {
     return (
-      <Link
-        ref={root}
-        href={href}
-        transitionTypes={["nav-forward"]}
-        className={classNames}
-        {...pointer}
-      >
+      <Link ref={root} href={href} transitionTypes={["nav-forward"]} className={classNames} {...pointer}>
         {body}
       </Link>
     );
   }
 
   return (
-    <a
-      ref={root}
-      href={href}
-      className={classNames}
-      {...rest}
-      {...pointer}
-    >
+    <a ref={root} href={href} className={classNames} {...rest} {...pointer}>
       {body}
     </a>
   );

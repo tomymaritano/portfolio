@@ -45,7 +45,6 @@ export default function HomePage() {
             Argentine week.{" "}
             <TextLink href="/work/quantis-intel">Quantis-intel</TextLink> is the financial report a desk will
             send.
-            is the financial report a desk will send.
           </p>
           <p className="mt-6 text-[13px] text-muted">
             <Link href="/work" transitionTypes={["nav-forward"]} className="transition-colors duration-200 hover:text-foreground">
