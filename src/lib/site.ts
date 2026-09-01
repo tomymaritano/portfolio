@@ -12,7 +12,7 @@ export const site = {
   url: "https://tomymaritano.com",
   photo: "/perfil.png",
   about: [
-    "I take a messy input and produce a document a person will send — not a dump of the model. I'm a senior full-stack engineer at Psynth (sole lead on engineering). I joined as a design engineer.",
+    "I take a messy input and produce a document a person will send — not a dump of the model. I'm Lead Engineer at Psynth. I joined as a design engineer.",
     "I was twelve, making brochure sites on a CMS. Client pages, not products. Buenos Aires. I studied at Universidad Tecnológica Nacional.",
     "Su Web Express hired me in 2017. Then Wolt in Copenhagen, Grandvalira in Andorra, Valere Realms, Unicoin in 2024. Frontend first, then the stack under it. I did not abandon the surface. I started owning what it sits on. I write when the decision is interesting.",
   ],
@@ -26,7 +26,7 @@ export const site = {
     {
       href: "https://psynth.ai",
       title: "Psynth",
-      lead: "Senior full-stack engineer (sole lead) at ",
+      lead: "Lead Engineer at ",
       tail: ". Test results and intake become a draft the psychologist reviews and signs. I joined as a design engineer.",
     },
     {
@@ -99,7 +99,7 @@ export const work = [
     kind: "work" as const,
     slug: "psynth",
     title: "Psynth",
-    line: "Clinical reporting. Senior full-stack / sole lead.",
+    line: "Clinical reporting. Lead Engineer.",
     started: 2026,
     date: "2026-08-01",
     year: "2026—",
@@ -420,6 +420,15 @@ export const work = [
 ] as const;
 
 export const writing = [
+  {
+    kind: "writing" as const,
+    slug: "lead-is-not-a-status-parade",
+    title: "Lead is not a status parade",
+    line: "Standup closes the day. Monday is grooming, then technical planning.",
+    started: 2026,
+    date: "2026-08-31",
+    year: "2026",
+  },
   {
     kind: "writing" as const,
     slug: "lily58-is-not-a-bigger-corne",
@@ -925,6 +934,7 @@ export const workNotes = {
 } as const satisfies Partial<Record<WorkSlug, WritingSlug>>;
 
 export const noteCases = {
+  "lead-is-not-a-status-parade": "psynth",
   "the-file-is-the-export": "dripnex",
   "the-renderer-never-sees-sql": "dripnex",
   "signing-in-is-not-uploading": "dripnex",
@@ -1000,7 +1010,7 @@ export const homeSlugs = ["psynth", "dripnex", "dolargaucho", "quantis-intel"] a
 export type HomeSlug = (typeof homeSlugs)[number];
 
 export const homeMeta = {
-  psynth: { tag: "Clinical reporting", role: "Senior Full Stack Engineer" },
+  psynth: { tag: "Clinical reporting", role: "Lead Engineer" },
   dripnex: { tag: "Hackable AI notes" },
   dolargaucho: { tag: "AI finance" },
   "quantis-intel": { tag: "Financial reporting" },

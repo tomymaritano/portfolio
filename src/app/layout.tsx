@@ -40,7 +40,7 @@ const jsonLd = {
   url: site.url,
   email: site.email,
   image: `${site.url}${site.photo}`,
-  jobTitle: "Senior Full Stack Engineer",
+  jobTitle: "Lead Engineer",
   sameAs: [site.x, site.github, site.linkedin],
   address: {
     "@type": "PostalAddress",
