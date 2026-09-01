@@ -22,7 +22,7 @@ export default function WritingIndexPage() {
           </a>
           .
         </Reveal>
-        <YearList items={writingIndex()} />
+        <YearList items={writingIndex()} markFirst />
       </PageFrame>
     </PageTransition>
   );

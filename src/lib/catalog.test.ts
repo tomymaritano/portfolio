@@ -341,6 +341,22 @@ describe("catalog", () => {
   });
 });
 
+describe("year list rail", () => {
+  it("clips the current-item hair to the row and keeps the spine in the year column", () => {
+    const list = readFileSync(new URL("../components/year-list.tsx", import.meta.url), "utf8");
+    const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+    const writing = readFileSync(new URL("../app/writing/page.tsx", import.meta.url), "utf8");
+    expect(writing).toMatch(/markFirst/);
+    expect(list).toMatch(/archive-spine-clip/);
+    expect(list).toMatch(/overflow-hidden/);
+    expect(list).toMatch(/data-year-latest/);
+    expect(css).toMatch(/\.archive-spine-clip/);
+    expect(css).toMatch(/width: 3\.25rem/);
+    expect(css).toContain(".year-row[data-year-latest] .year-hair");
+    expect(css).not.toMatch(/left:\s*3\.75rem/);
+  });
+});
+
 describe("draft files", () => {
   const source = readFileSync(new URL("./site.ts", import.meta.url), "utf8");
 

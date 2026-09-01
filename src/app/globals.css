@@ -491,28 +491,45 @@ body[data-menu="closing"] .site-header {
   outline-offset: 3px;
 }
 
+/* Year-column clip: the scroll spine must not paint into title rows. */
+.archive-spine-clip {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3.25rem;
+  overflow: hidden;
+}
+
 .archive-spine {
   pointer-events: none;
   position: absolute;
   top: 0.85rem;
+  right: 0;
   bottom: 0.85rem;
-  left: 3.75rem;
+  left: auto;
   width: 1px;
   background: color-mix(in srgb, var(--accent) 32%, transparent);
   transform: scaleY(0);
   transform-origin: top center;
 }
 
+/* Item rail. Height is the row box only — overflow is clipped on .year-row. */
 .year-hair {
   pointer-events: none;
   position: absolute;
-  top: 0.7rem;
-  bottom: 0.7rem;
-  left: -0.75rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
   width: 1px;
   background: var(--accent);
   transform: scaleY(0);
-  transform-origin: center;
+  transform-origin: top center;
+}
+
+.year-row[data-year-latest] .year-hair {
+  transform: scaleY(1);
 }
 
 .archive-year {
@@ -553,6 +570,7 @@ body[data-menu="closing"] .site-header {
   .reading-progress {
     display: none;
   }
+  .year-row[data-year-latest] .year-hair,
   .year-row:hover .year-hair,
   .year-row:focus-visible .year-hair {
     transform: scaleY(1);
