@@ -131,8 +131,10 @@ export async function getGhostPost(slug: string) {
 }
 
 export function sanitizeGhostHtml(html: string) {
+  const origin = process.env.GHOST_URL?.replace(/\/$/, "") ?? "";
   return html
     .replace(/<script[\s\S]*?<\/script>/gi, "")
     .replace(/<iframe[\s\S]*?<\/iframe>/gi, "")
-    .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "");
+    .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")
+    .replace(/href=(["'])#\/portal\/?\1/gi, origin ? `href=$1${origin}/#/portal/$1` : "$&");
 }
