@@ -1,16 +1,19 @@
 import Link from "next/link";
+import { HomeRings } from "@/components/home-rings";
 import { PageFrame } from "@/components/page-frame";
 import { PageTransition } from "@/components/page-transition";
 import { Portrait } from "@/components/portrait";
 import { Reveal, StaggerIn } from "@/components/reveal";
 import { TextLink } from "@/components/text-link";
+import { WorkSpiral } from "@/components/work-spiral";
 import { site } from "@/lib/site";
 
 export default function HomePage() {
   return (
     <PageTransition>
       <PageFrame className="pt-12 pb-24">
-        <Reveal as="header">
+        <Reveal as="header" className="relative">
+          <HomeRings />
           <Portrait />
           <h1 className="text-[2rem] leading-tight font-semibold tracking-tight text-foreground sm:text-[2.35rem]">
             {site.headline}
@@ -46,6 +49,9 @@ export default function HomePage() {
             <TextLink href="/work/quantis-intel">Quantis-intel</TextLink> is the financial report a desk will
             send.
           </p>
+          <div className="relative mt-10" style={{ width: "100vw", marginLeft: "calc(50% - 50vw)" }}>
+            <WorkSpiral />
+          </div>
           <p className="mt-6 text-[13px] text-muted">
             <Link href="/work" transitionTypes={["nav-forward"]} className="transition-colors duration-200 hover:text-foreground">
               My work →
