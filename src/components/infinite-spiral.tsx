@@ -140,8 +140,15 @@ const InfiniteSpiral = ({
       const half = count / 2;
       const width = Math.max(bounds.width, 1);
       const height = Math.max(bounds.height, 1);
-      const fit = Math.min(1, width / (cardWidth * 2.8), height / (cardHeight * 2.35));
-      const responsiveRadius = Math.min(radius, Math.max(72, width * 0.36)) * fit;
+      const fit = clamp(
+        Math.min(width / (cardWidth * 2.05), height / (cardHeight * 1.85)),
+        0.52,
+        1.4
+      );
+      const responsiveRadius = Math.max(
+        80,
+        Math.min(radius * fit, (width - cardWidth * fit) * 0.5, (height - cardHeight * fit) * 0.46)
+      );
       const fadeStart = clamp(1 - edgeFade, 0, 0.98);
       const turnSize = Math.max(cardsPerTurn, 1);
 
@@ -231,7 +238,7 @@ const InfiniteSpiral = ({
   };
 
   const itemClassName =
-    'absolute top-1/2 left-1/2 block h-[var(--spiral-height)] w-[var(--spiral-width)] overflow-hidden rounded-[var(--spiral-radius)] border border-line bg-card shadow-[0_16px_40px_rgba(0,0,0,0.45)] [transform-style:preserve-3d] [backface-visibility:hidden] [will-change:transform,opacity,filter]';
+    'absolute top-1/2 left-1/2 block h-[var(--spiral-height)] w-[var(--spiral-width)] overflow-hidden rounded-[var(--spiral-radius)] border border-[#7ec8ff]/70 bg-[#071018] shadow-[0_24px_70px_rgba(0,0,0,0.55),0_0_0_1px_rgba(126,200,255,0.28),0_0_42px_rgba(126,200,255,0.16)] [transform-style:preserve-3d] [backface-visibility:hidden] [will-change:transform,opacity,filter]';
 
   return (
     <div
@@ -272,14 +279,20 @@ const InfiniteSpiral = ({
       <div className="absolute inset-0 [transform-style:preserve-3d]" role="list" aria-label="Infinite spiral gallery">
         {normalizedItems.map((item, index) => {
           const content = (
-            <img
-              className="absolute inset-0 block h-full w-full select-none object-center"
-              src={item.src}
-              alt={item.alt}
-              loading={index < 6 ? 'eager' : 'lazy'}
-              draggable={false}
-              style={imageStyle}
-            />
+            <>
+              <img
+                className="absolute inset-0 block h-full w-full select-none object-center"
+                src={item.src}
+                alt={item.alt}
+                loading={index < 6 ? 'eager' : 'lazy'}
+                draggable={false}
+                style={imageStyle}
+              />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-[#7ec8ff]/28 mix-blend-color"
+              />
+            </>
           );
 
           return item.href ? (

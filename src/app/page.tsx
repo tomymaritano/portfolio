@@ -49,7 +49,7 @@ export default function HomePage() {
             <TextLink href="/work/quantis-intel">Quantis-intel</TextLink> is the financial report a desk will
             send.
           </p>
-          <div className="relative mt-10" style={{ width: "100vw", marginLeft: "calc(50% - 50vw)" }}>
+          <div className="relative mt-10 ml-[calc(50%-50vw)] w-screen max-w-[100vw]">
             <WorkSpiral />
           </div>
           <p className="mt-6 text-[13px] text-muted">

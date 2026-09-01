@@ -27,6 +27,7 @@
 html {
   background: var(--background);
   color-scheme: dark;
+  overflow-x: clip;
 }
 
 body {
@@ -34,6 +35,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 .site-atmosphere {

@@ -16,19 +16,22 @@ export function WorkSpiral() {
   });
 
   return (
-    <InfiniteSpiral
-      items={items}
-      speed={0.32}
-      radius={150}
-      cardWidth={168}
-      cardHeight={105}
-      verticalSpacing={50}
-      cardsPerTurn={6}
-      edgeFade={0.42}
-      edgeBlur={5}
-      grayscale={0.08}
-      pauseOnHover
-      className="h-[26rem] sm:h-[32rem]"
-    />
+    <div className="relative h-dvh min-h-[100dvh] overflow-hidden bg-[radial-gradient(ellipse_at_center,rgba(126,200,255,0.2),transparent_68%)]">
+      <InfiniteSpiral
+        items={items}
+        speed={0.24}
+        radius={720}
+        cardWidth={340}
+        cardHeight={212}
+        verticalSpacing={88}
+        cardsPerTurn={6}
+        perspective={1500}
+        edgeFade={0.04}
+        edgeBlur={0.4}
+        grayscale={0}
+        pauseOnHover
+        className="h-full min-h-0"
+      />
+    </div>
   );
 }
